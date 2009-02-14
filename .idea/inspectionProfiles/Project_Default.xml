@@ -1,0 +1,24 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0" is_locked="false">
+    <option name="myName" value="Project Default" />
+    <option name="myLocal" value="false" />
+    <inspection_tool class="JpaDataSourceORMInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="JpaDataSourceORMDomInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="EjbErrorInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="EjbWarningInspection" level="WARNING" enabled="false" />
+    <inspection_tool class="EjbDomInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="EjbQlInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="JavaeeApplicationDomInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="MimeType" level="ERROR" enabled="false" />
+    <inspection_tool class="JpaORMDomInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="JpaModelErrorInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="JpaModelWarningInspection" level="WARNING" enabled="false" />
+    <inspection_tool class="JpaQlInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="JpaQueryApiInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="JpaDomInspection" level="ERROR" enabled="false" />
+    <inspection_tool class="ReferencesToClassesFromDefaultPackagesInJSPFile" level="ERROR" enabled="false" />
+    <inspection_tool class="SelfIncludingJspFiles" level="ERROR" enabled="false" />
+    <inspection_tool class="WebProperties" level="ERROR" enabled="false" />
+    <inspection_tool class="WebWarnings" level="WARNING" enabled="false" />
+  </profile>
+</component>

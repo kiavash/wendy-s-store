@@ -1,0 +1,20 @@
+1. Create a new product
+
+- Fill out the product name, description (markdown/textile/rte?), price
+- Upload images
+- Choose thumbnail
+- Choose categories
+- Define customizations
+
+2. Shop
+
+- Search/Browse
+- Customer finds item they like, Add to Cart
+- Customize Product
+- Return to shopping
+- Loop until....
+- Checkout
+
+3. Place Order
+
+- Login or New Customer
