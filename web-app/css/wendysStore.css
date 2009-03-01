@@ -1,5 +1,5 @@
 body {
-    background: #ff77cc;
+    background: url(../images/limedice.gif);
 }
 
 #container {
@@ -21,7 +21,7 @@ body {
 }
 
 .daisy {
-    background: url(../images/daisy_icon.jpg) no-repeat;
+    background: url(../images/daisy_icon.png) no-repeat;
     list-style-type: none;
     text-indent: 30px;
     height: 25px;
