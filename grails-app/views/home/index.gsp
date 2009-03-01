@@ -1,7 +1,7 @@
 <%@ page import="com.mattstine.wendysstore.domain.Product" %>
 <html>
     <head>
-        <title>Whimsical Stationery</title>
+        <title>Personalized Stationery, Invitations, and Gifts</title>
 		<meta name="layout" content="main" />
     </head>
     <body>
