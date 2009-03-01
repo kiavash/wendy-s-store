@@ -19,8 +19,7 @@
     <div id="spinner" class="spinner" style="display:none;">
       <img src="${createLinkTo(dir: 'images', file: 'spinner.gif')}" alt="Spinner"/>
     </div>
-    %{--<div class="logo"><img src="${createLinkTo(dir: 'images', file: 'grails_logo.jpg')}" alt="Grails"/></div>--}%
-    <h1>The Crazy Daisy Market</h1>
+    <div class="logo"><img src="${createLinkTo(dir: 'images', file: 'header.png')}" alt="Grails"/></div>
   </div>
   <hr>
   <div id="sidebar" class="span-4">
