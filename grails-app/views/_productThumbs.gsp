@@ -8,7 +8,7 @@
 
   </div>
 
-  <g:if test="${index % 3 == 2 || (products.size() < 3 && (index % 3 == 0 || index % 3 == 1))}">
+  <g:if test="${(index % 3 == 2) || ((products.size() - index) == 1)}">
     </div>
   </g:if>
 </g:each>
