@@ -1,7 +1,7 @@
 - Related products
 - Look up information on PayPal plugin
 - Featured products
-- Product discounts
+- com.mattstine.wendysstore.domain.Product discounts
 - Setup version control (SVN or Git?)
 - How to store the media - in the DB or on the FS?
 - Thumbnail creation - library for this? (Grails -or- JavaPosse podcast mentioned one I think)

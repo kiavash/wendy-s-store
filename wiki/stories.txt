@@ -9,12 +9,12 @@
 2. Shop
 
 - Search/Browse
-- Customer finds item they like, Add to Cart
-- Customize Product
+- com.mattstine.wendysstore.domain.Customer finds item they like, Add to Cart
+- Customize com.mattstine.wendysstore.domain.Product
 - Return to shopping
 - Loop until....
 - Checkout
 
-3. Place Order
+3. Place com.mattstine.wendysstore.domain.Order
 
-- Login or New Customer
+- Login or New com.mattstine.wendysstore.domain.Customer

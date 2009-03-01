@@ -1,3 +1,0 @@
-class CustomizationItem {
-  Customization customization
-}

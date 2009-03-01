@@ -1,0 +1,29 @@
+body {
+    background: #ff77cc;
+}
+
+#container {
+    background-color: #fff;
+    padding: 10 10 10 10;
+}
+
+#footer {
+    text-align: center;
+}
+
+.product {
+    text-align: center;
+    
+}
+
+.product-row {
+    padding-top: 20;
+}
+
+.daisy {
+    background: url(../images/daisy_icon.jpg) no-repeat;
+    list-style-type: none;
+    text-indent: 30px;
+    height: 25px;
+    padding-top: 5px;
+}

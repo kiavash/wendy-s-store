@@ -41,6 +41,9 @@ environments {
 
 // log4j configuration
 log4j = {
+    debug  'grails.app.controller'
+
+
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
 	       'org.codehaus.groovy.grails.web.pages', //  GSP
 	       'org.codehaus.groovy.grails.web.sitemesh', //  layouts
@@ -57,3 +60,5 @@ log4j = {
 
 
      
+
+//log4j.logger.org.springframework.security='off,stdout'
