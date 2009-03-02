@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title>${fieldValue(bean:productInstance, field:'name')}</title>
+        <g:javascript library="prototype"/>
     </head>
     <body>
             <p>
@@ -30,6 +31,16 @@
                     <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
                 </g:form>
             </div>
+
+            <g:form method="post" action="uploadProductImage" enctype="multipart/form-data">
+		      <input type="file" name="newProductImage"/>
+              %{--<g:submitToRemote update="imageUploaded"
+                      value="Upload Image"
+                      url="${[controller:'product',action:'uploadProductImage']}"/>--}%
+              <g:submitButton value="Upload Image" name="uploadImage"/>
+	        </g:form>
+
+            <div id="imageUploaded"></div>
             </g:ifAllGranted>
     </body>
 </html>
