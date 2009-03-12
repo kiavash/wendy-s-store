@@ -2,6 +2,8 @@ package com.mattstine.wendysstore.controllers
 
 import com.mattstine.wendysstore.domain.Product
 import org.springframework.dao.DataIntegrityViolationException
+import groovy.xml.MarkupBuilder
+import com.mattstine.wendysstore.domain.Image
 
 class ProductController {
 
@@ -38,9 +40,27 @@ class ProductController {
   def uploadProductImage = {
     def f = request.getFile('newProductImage')
     if (!f.empty) {
-      f.transferTo(new File("${grailsApplication.config.store.productImages.location}/${f.originalFilename}"))
-      //response.sendError(200, 'Done');
-      render "File Uploaded!"
+
+      def path = "${grailsApplication.config.store.productImages.location}/${f.originalFilename}"
+
+      f.transferTo(new File(path))
+
+      def product = Product.get(params['id'])
+      product.image = new Image(path:path, name:f.originalFilename)
+      product.save()      
+
+      def writer = new StringWriter()
+      def xml = new MarkupBuilder(writer)
+
+      xml.html {
+        body {
+          textarea {
+            img(src:resource(dir: grailsApplication.config.store.productImages.webPath, file: product.image.name), width:'250')
+          }
+        }
+      }
+      
+      render writer.toString()
     }
     else {
       flash.message = 'file cannot be empty'
