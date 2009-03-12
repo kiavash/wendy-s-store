@@ -56,10 +56,12 @@
                                     <label for="categories">Categories:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:productInstance,field:'categories','errors')}">
-                                    <g:select name="categories"
-from="${ProductCategory.list()}"
-size="5" multiple="yes" optionKey="id"
-value="${productInstance?.categories?.id}" optionValue="name" />
+                                  <g:select id="category.id" name="category.id" from="${ProductCategory.list()}"
+                                  value="${productInstance?.category?.id}" optionValue="breadcrumbs" optionKey="id"
+                                />
+
+
+
 
                                 </td>
                             </tr>
