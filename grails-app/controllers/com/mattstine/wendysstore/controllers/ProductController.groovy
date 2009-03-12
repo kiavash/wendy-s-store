@@ -47,7 +47,7 @@ class ProductController {
       //Create unique name for this image set based on current timestamp
       def name = "image" + new Date().getTime()
 
-      def originalFilename = "${name}.jpg"                                           
+      def originalFilename = "${name}.jpg"
       def mediumFilename = "${name}_medium.jpg"
       def thumbnailFilename = "${name}_thumb.jpg"
 
@@ -58,15 +58,15 @@ class ProductController {
       imageTool.load(file.readBytes())
 
       imageTool.thumbnailSpecial(250, 158, 3, 2)
-      imageTool.writeResult("${imagePath}/${mediumFilename}","JPEG")
+      imageTool.writeResult("${imagePath}/${mediumFilename}", "JPEG")
 
       imageTool.thumbnailSpecial(192, 121, 3, 2)
-      imageTool.writeResult("${imagePath}/${thumbnailFilename}","JPEG")
+      imageTool.writeResult("${imagePath}/${thumbnailFilename}", "JPEG")
 
       def product = Product.get(params['id'])
       product.fullSizeImage = new Image(path: imagePath, name: originalFilename)
       product.mediumImage = new Image(path: imagePath, name: mediumFilename)
-      product.thumbnailImage = new Image(path: imagePath, name:thumbnailFilename)
+      product.thumbnailImage = new Image(path: imagePath, name: thumbnailFilename)
       product.save()
 
       def writer = new StringWriter()
