@@ -4,12 +4,15 @@ class Product {
   String description
   BigDecimal price
   Boolean featured = false
-  Image image
-  //com.mattstine.wendysstore.domain.Image thumbnail
+  Image fullSizeImage
+  Image mediumImage
+  Image thumbnailImage
 
-  static constraints = {
+  static constraints = {    
     description(maxSize:1000)
-    image(nullable:true)
+    fullSizeImage(nullable:true)
+    mediumImage(nullable:true)
+    thumbnailImage(nullable:true)
   }
 
   static belongsTo = [category:ProductCategory]
