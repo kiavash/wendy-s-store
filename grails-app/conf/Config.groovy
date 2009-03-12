@@ -10,7 +10,8 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-store.productImages.location = "/Users/mstine/Projects/tempImageStore"
+store.productImages.location = "/Users/mstine/Projects/wendysStore/web-app/images/productImages"
+store.productImages.webPath = "images/productImages"
 
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
