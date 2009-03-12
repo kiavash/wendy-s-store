@@ -3,8 +3,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="main"/>
   <title>${fieldValue(bean: productInstance, field: 'name')}</title>
-  <script type="text/javascript" src="${createLinkTo(dir:'js/dojo', file:'dojo.js')}"
-    djConfig="parseOnLoad:true, isDebug:true"></script>
+  <script type="text/javascript" src="${createLinkTo(dir: 'js/dojo', file: 'dojo.js')}"
+          djConfig="parseOnLoad:true, isDebug:true"></script>
   <g:javascript>
     dojo.require("dojo.io.iframe");
 
@@ -28,28 +28,31 @@
     <div class="message">${flash.message}</div>
   </g:if>
 </div>
-<div id="productImage" class="span-7"><img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.image?.name)}" width="250"></div>
-<div class="span-13 last">
-  <p>${fieldValue(bean: productInstance, field: 'description')}<br/><br/>
-    <strong><g:formatNumber format="\$0.00" number="${productInstance.price}"/></strong></p>
+<div id="productContainer" class="span-20 last">
+  <div id="productImage" class="span-7"><img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.mediumImage?.name)}" width="250"></div>
+  <div class="span-13 last">
+    <p>${fieldValue(bean: productInstance, field: 'description')}<br/><br/>
+      <strong><g:formatNumber format="\$0.00" number="${productInstance.price}"/></strong></p>
+  </div>
 </div>
 <g:ifAllGranted role="ROLE_ADMIN">
-
-  <div class="buttons">
+<div id="buttonContainer" class="span-20 last">
+  <div class="span-5">&nbsp;</div>
+  <div class="buttons span-10" style="text-align: center">
     <g:form>
       <input type="hidden" name="id" value="${productInstance?.id}"/>
       <span class="button"><g:actionSubmit class="edit" value="Edit"/></span>
       <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete"/></span>
     </g:form>
+
+    <g:form name="uploadProductImageForm" method="post" action="uploadProductImage" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="${productInstance?.id}"/>
+      <input type="file" name="newProductImage"/>
+      <span class="button"><input class="add" type="button" name="uploadImage" value="Upload Image" onclick="submitForm()"/></span>
+    </g:form>
   </div>
-
-  <g:form name="uploadProductImageForm" method="post" action="uploadProductImage" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="${productInstance?.id}"/>
-    <input type="file" name="newProductImage"/>
-    <input type="button" name="uploadImage" value="Upload Image" onclick="submitForm()"/>
-  </g:form>
-
-  <div id="imageUploaded"></div>
+  <div class="span-5 last">&nbsp;</div>
+</div>
 </g:ifAllGranted>
 </body>
 </html>
