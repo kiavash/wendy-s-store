@@ -1,9 +1,10 @@
 package com.mattstine.wendysstore.controllers
 
-import com.mattstine.wendysstore.domain.Product
-import org.springframework.dao.DataIntegrityViolationException
-import groovy.xml.MarkupBuilder
 import com.mattstine.wendysstore.domain.Image
+import com.mattstine.wendysstore.domain.Product
+import groovy.xml.MarkupBuilder
+import org.springframework.dao.DataIntegrityViolationException
+import org.grails.plugins.imagetools.ImageTool
 
 class ProductController {
 
@@ -41,13 +42,32 @@ class ProductController {
     def f = request.getFile('newProductImage')
     if (!f.empty) {
 
-      def path = "${grailsApplication.config.store.productImages.location}/${f.originalFilename}"
+      def imagePath = grailsApplication.config.store.productImages.location
 
-      f.transferTo(new File(path))
+      //Create unique name for this image set based on current timestamp
+      def name = "image" + new Date().getTime()
+
+      def originalFilename = "${name}.jpg"                                           
+      def mediumFilename = "${name}_medium.jpg"
+      def thumbnailFilename = "${name}_thumb.jpg"
+
+      def file = new File("${imagePath}/${originalFilename}")
+      f.transferTo(file)
+
+      def imageTool = new ImageTool()
+      imageTool.load(file.readBytes())
+
+      imageTool.thumbnailSpecial(250, 158, 3, 2)
+      imageTool.writeResult("${imagePath}/${mediumFilename}","JPEG")
+
+      imageTool.thumbnailSpecial(192, 121, 3, 2)
+      imageTool.writeResult("${imagePath}/${thumbnailFilename}","JPEG")
 
       def product = Product.get(params['id'])
-      product.image = new Image(path:path, name:f.originalFilename)
-      product.save()      
+      product.fullSizeImage = new Image(path: imagePath, name: originalFilename)
+      product.mediumImage = new Image(path: imagePath, name: mediumFilename)
+      product.thumbnailImage = new Image(path: imagePath, name:thumbnailFilename)
+      product.save()
 
       def writer = new StringWriter()
       def xml = new MarkupBuilder(writer)
@@ -55,11 +75,11 @@ class ProductController {
       xml.html {
         body {
           textarea {
-            img(src:resource(dir: grailsApplication.config.store.productImages.webPath, file: product.image.name), width:'250')
+            img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '250')
           }
         }
       }
-      
+
       render writer.toString()
     }
     else {
@@ -76,7 +96,7 @@ class ProductController {
         flash.message = "Product ${params.id} deleted"
         redirect(action: list)
       }
-      catch (org.springframework.dao.DataIntegrityViolationException e) {
+      catch (DataIntegrityViolationException e) {
         flash.message = "Product ${params.id} could not be deleted"
         redirect(action: show, id: params.id)
       }
