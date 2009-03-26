@@ -32,6 +32,7 @@
     <h2>Links:</h2>
     <ul>
       <li class="daisy"><g:link controller="home">Home</g:link> </li>
+      <li class="daisy"><g:link controller="shopping" action="viewCart">View Cart</g:link> </li>
       <g:isNotLoggedIn>
         <li class="daisy"><g:link controller="login">Login</g:link></li>
       </g:isNotLoggedIn>

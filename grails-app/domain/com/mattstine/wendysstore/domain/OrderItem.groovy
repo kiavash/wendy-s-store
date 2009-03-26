@@ -1,6 +1,9 @@
 package com.mattstine.wendysstore.domain
-class OrderItem {
-  //com.mattstine.wendysstore.domain.Product product
 
-  static hasMany = [customizationItems:CustomizationItem]
+import com.mattstine.wendysstore.domain.Product
+
+class OrderItem extends com.metasieve.shoppingcart.Shoppable {
+
+  Product product
+  
 }

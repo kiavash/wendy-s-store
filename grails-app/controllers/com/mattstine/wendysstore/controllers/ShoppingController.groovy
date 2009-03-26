@@ -8,9 +8,7 @@ class ShoppingController {
 
   def shoppingCartService
 
-
   def index = { }
-
 
   def category = {
 
@@ -35,39 +33,32 @@ class ShoppingController {
   }
 
   def viewCart = {
-    render(view: "cart")
-  }
+    def modelMap = [:]
+    modelMap.numberOfItems = shoppingCartService.getItems()?.size()
 
-  def updateQuantities = {
+    if (modelMap.numberOfItems > 0) {
+      def totalCharge = 0.00
 
-    params.findAll {key, value ->
-      key.startsWith("quantityForItem")
-    }.each {key, value ->
-      def matcher = (key =~ /quantityForItem([0-9+])/)
-      def orderItemId = matcher[0][1]
+      shoppingCartService.getItems().each() { item ->
+        totalCharge += com.metasieve.shoppingcart.Shoppable.findByShoppingItem(item).product.price * shoppingCartService.getQuantity(item)
+      }
 
-      def orderItem = com.metasieve.shoppingcart.Shoppable.get(orderItemId.toLong())
-
-      shoppingCartService.removeFromShoppingCart(orderItem, shoppingCartService.getQuantity(orderItem))
-      shoppingCartService.addToShoppingCart(orderItem, value.toInteger())
+      modelMap.totalCharge = totalCharge
     }
 
-    render(view: "cart")
+    render(view: "cart", model: modelMap)
   }
 
-  def updateQuantity 
+  def updateQuantity = {
+    def orderItem = com.metasieve.shoppingcart.Shoppable.get(params.id)
+    shoppingCartService.removeFromShoppingCart(orderItem, shoppingCartService.getQuantity(orderItem))
+    shoppingCartService.addToShoppingCart(orderItem, params.quantity.toInteger())
+    redirect(action: "viewCart")
+  }
 
   def deleteItemFromCart = {
-
-    def nameOfButtonClicked = params.find {key, value ->
-      key.startsWith("deleteItem")
-    }
-
-    def matcher = (nameOfButtonClicked =~ /deleteItem([0-9+])/)
-    def orderItemId = matcher[0][1]
-
-    def orderItem = com.metasieve.shoppingcart.Shoppable.get(orderItemId.toLong())
-
+    def orderItem = com.metasieve.shoppingcart.Shoppable.get(params.id)
     shoppingCartService.removeFromShoppingCart(orderItem, shoppingCartService.getQuantity(orderItem))
+    redirect(view: "viewCart")
   }
 }
