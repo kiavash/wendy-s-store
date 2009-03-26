@@ -48,6 +48,7 @@ class ProductController {
       def name = "image" + new Date().getTime()
 
       def originalFilename = "${name}.jpg"
+      def largeFilename = "${name}_large.jpg"
       def mediumFilename = "${name}_medium.jpg"
       def thumbnailFilename = "${name}_thumb.jpg"
 
@@ -57,6 +58,9 @@ class ProductController {
       def imageTool = new ImageTool()
       imageTool.load(file.readBytes())
 
+      imageTool.thumbnailSpecial(800, 600, 3, 2)
+      imageTool.writeResult("${imagePath}/${largeFilename}", "JPEG")
+
       imageTool.thumbnailSpecial(250, 158, 3, 2)
       imageTool.writeResult("${imagePath}/${mediumFilename}", "JPEG")
 
@@ -64,7 +68,7 @@ class ProductController {
       imageTool.writeResult("${imagePath}/${thumbnailFilename}", "JPEG")
 
       def product = Product.get(params['id'])
-      product.fullSizeImage = new Image(path: imagePath, name: originalFilename)
+      product.fullSizeImage = new Image(path: imagePath, name: largeFilename)
       product.mediumImage = new Image(path: imagePath, name: mediumFilename)
       product.thumbnailImage = new Image(path: imagePath, name: thumbnailFilename)
       product.save()
@@ -75,7 +79,10 @@ class ProductController {
       xml.html {
         body {
           textarea {
-            img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '250')
+            a(href: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.fullSizeImage.name), rel: 'lightbox') {
+              img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '250')
+              br ('Click to Enlarge')
+            }
           }
         }
       }
