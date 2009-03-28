@@ -33,14 +33,14 @@
                                 </td>
                             </tr>
 
-                            <tr class="prop">
+                            %{--<tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="price">Price:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:productInstance,field:'price','errors')}">
                                     <input type="text" id="price" name="price" value="${fieldValue(bean:productInstance,field:'price')}" />
                                 </td>
-                            </tr>
+                            </tr>--}%
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
