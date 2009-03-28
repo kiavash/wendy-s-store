@@ -26,7 +26,7 @@
       <g:set value="${it['qty']}" var="quantity"/>
       <tr>
         <td>
-          ${orderItem.product.name}
+          ${orderItem.product.name}<br/>${orderItem.price.description}
         </td>
         <td>
           <g:form controller="shopping" action="updateQuantity">
@@ -36,7 +36,7 @@
           </g:form>
         </td>
         <td style="text-align: right">
-          <g:formatNumber format="\$0.00" number="${orderItem.product.price * quantity}"/>
+          <g:formatNumber format="\$0.00" number="${orderItem.price.price * quantity}"/>
         </td>
         <td>
           <g:form controller="shopping" action="deleteItemFromCart">
@@ -54,6 +54,9 @@
     </tr>
     </tbody>
   </table>
+  <g:form controller="shopping" action="checkout">
+    <g:submitButton value="Checkout" name="checkoutButton"/>
+  </g:form>
   </g:else>
 </div>
 </body>
