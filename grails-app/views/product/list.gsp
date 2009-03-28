@@ -22,7 +22,7 @@
 
                             <g:sortableColumn property="name" title="Name" />
 
-                   	        <g:sortableColumn property="price" title="Price" />
+                   	        %{--<g:sortableColumn property="price" title="Price" />--}%
                         
                             <g:sortableColumn property="featured" title="Featured" />
 
@@ -37,7 +37,7 @@
 
                             <td>${fieldValue(bean:productInstance, field:'name')}</td>
 
-                            <td><g:formatNumber number="${productInstance.price}" format="\$0.00"/></td>
+                            %{--<td><g:formatNumber number="${productInstance.price}" format="\$0.00"/></td>--}%
                         
                             <td>${fieldValue(bean:productInstance, field:'featured')}</td>
 
