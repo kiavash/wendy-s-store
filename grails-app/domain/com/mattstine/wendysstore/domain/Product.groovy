@@ -2,7 +2,7 @@ package com.mattstine.wendysstore.domain
 class Product {
   String name
   String description
-  BigDecimal price
+  List prices
   Boolean featured = false
   Image fullSizeImage
   Image mediumImage
@@ -17,7 +17,7 @@ class Product {
 
   static belongsTo = [category:ProductCategory]
 
-  static hasMany = [customizations:Customization]
+  static hasMany = [customizations:Customization, prices:Price]
 
   static mapping = {
     sort: "name"
