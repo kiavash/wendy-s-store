@@ -5,6 +5,7 @@ import com.mattstine.wendysstore.domain.Product
 import groovy.xml.MarkupBuilder
 import org.springframework.dao.DataIntegrityViolationException
 import org.grails.plugins.imagetools.ImageTool
+import com.mattstine.wendysstore.domain.Price
 
 class ProductController {
 
@@ -30,12 +31,13 @@ class ProductController {
 
   def show = {
     def productInstance = Product.get(params.id)
+    def priceInstance = new Price()
 
     if (!productInstance) {
       flash.message = "Product not found with id ${params.id}"
       redirect(action: list)
     }
-    else { return [productInstance: productInstance] }
+    else { return [productInstance: productInstance, priceInstance: priceInstance] }
   }
 
   def uploadProductImage = {
@@ -93,6 +95,36 @@ class ProductController {
       flash.message = 'file cannot be empty'
       redirect(action: show)
     }
+  }
+
+  def addPrice = {
+    def price = new Price(params)
+    def product = Product.get(params.productId)
+    product.addToPrices(price)
+    product.save()
+    redirect(action: show, id: params.productId)
+  }
+
+  def deletePrice = {
+    def product = Product.get(params.productId)
+    def price = Price.get(params.id)
+    product.removeFromPrices(price)
+    product.save()
+    price.delete()
+    redirect(action: show, id: params.productId)
+  }
+
+  def editPrice = {
+    def priceInstance = Price.get(params.id)
+    def productInstance = Product.get(params.productId)
+    render(view: 'show', model: [productInstance: productInstance, priceInstance: priceInstance])
+  }
+
+  def updatePrice = {
+    def price = Price.get(params.id)
+    price.properties = params
+    price.save()
+    redirect(action: show, id: params.productId)    
   }
 
   def delete = {
