@@ -25,8 +25,7 @@ environments {
 	}
 	production {
 		dataSource {
-			dbCreate = "update"
-			url = "jdbc:mysql://localhost/wendysStoreProd"
+		    jndiName = "jdbc/WendysStoreProdDB"
 		}
 	}
 }
