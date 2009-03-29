@@ -26,7 +26,7 @@ environments {
 	production {
 		dataSource {
             dbCreate = "update"
-		    jndiName = "jdbc/WendysStoreProdDB"
+		    jndiName = "java:jdbc/WendysStoreProdDB"
 		}
 	}
 }
