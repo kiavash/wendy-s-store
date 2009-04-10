@@ -10,7 +10,7 @@ class Price {
     static DecimalFormat format = new DecimalFormat("\$0.00")
 
     String getDisplay() {
-      "${description}: ${format.format(price)}"  
+      "${description} (${format.format(price)})"  
     }
 
     static transients = ['display']
