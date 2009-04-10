@@ -2,6 +2,9 @@ import com.mattstine.wendysstore.domain.Product
 import com.mattstine.wendysstore.domain.ProductCategory
 import com.mattstine.wendysstore.domain.Role
 import com.mattstine.wendysstore.domain.User
+import com.mattstine.wendysstore.domain.Customization
+import com.mattstine.wendysstore.domain.CustomizationChoice
+import com.mattstine.wendysstore.domain.CustomizationType
 
 class BootStrap {
 
@@ -70,6 +73,18 @@ class BootStrap {
                     enabled:true,
                     email:"matt@mattstine.com",
                     description:"Me").addToAuthorities(roleAdmin).save()
+
+
+           def font = new Customization(label:"Font", type:CustomizationType.CHOICESET)
+           font.addToChoices(new CustomizationChoice(label:"Times New Roman"))
+           font.addToChoices(new CustomizationChoice(label:"Girls Are Weird"))
+           font.addToChoices(new CustomizationChoice(label:"Arial"))
+           font.save()
+
+           new Customization(label:"Proof", type:CustomizationType.CHECKBOX, chargeable:true, price:1.00).save()
+
+           new Customization(label:"Personalization", type:CustomizationType.LARGETEXT).save()
+
 
 
          break
