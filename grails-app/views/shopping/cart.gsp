@@ -26,19 +26,26 @@
       <g:set value="${it['qty']}" var="quantity"/>
       <tr>
         <td>
-          ${orderItem.product.name}<br/>${orderItem.price.description}
+         <strong>${orderItem.product.name}</strong><br/>${orderItem.price.description}<br/><br/>
+
+          <strong>Options:</strong><br/><br/>
+          <ul style="list-style-type: none">
+            <g:each in="${orderItem.customizationItems}" var="customizationItem">
+              <li style="padding-bottom: 5px"><g:renderCartCustomizationItem customizationItem="${customizationItem}"/></li>
+            </g:each>
+          </ul>
         </td>
-        <td>
+        <td style="vertical-align:top">
           <g:form controller="shopping" action="updateQuantity">
             <g:hiddenField name="id" value="${item.id}"/>
             <g:textField name="quantity" value="${quantity}"/>
             <g:submitButton name="updateQuantityButton" value="Update"/>
           </g:form>
         </td>
-        <td style="text-align: right">
-          <g:formatNumber format="\$0.00" number="${orderItem.price.price * quantity}"/>
+        <td style="text-align: right; vertical-align: top; padding-top: 10px">
+          <g:formatNumber format="\$0.00" number="${orderItem.totalPrice * quantity}"/>
         </td>
-        <td>
+        <td style="vertical-align: top">
           <g:form controller="shopping" action="deleteItemFromCart">
             <g:hiddenField name="id" value="${item.id}"/>
             <g:submitButton name="deleteItemFromCartButton" value="Delete"/>
