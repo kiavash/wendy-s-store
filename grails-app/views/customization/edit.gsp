@@ -23,6 +23,19 @@
         }
       });
 
+      if ($F('type') == 'CHECKBOX') {
+        $('required').disable();
+      }
+
+      $('type').observe('change', function() {
+        if ($F('type') == 'CHECKBOX') {
+          $('required').disable();
+          $('required').checked = false;
+        } else {
+          $('required').enable();
+        }
+      });
+
     });
   </g:javascript>
 </head>

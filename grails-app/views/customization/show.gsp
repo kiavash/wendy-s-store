@@ -4,6 +4,27 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="main"/>
   <title>Show Customization</title>
+  <g:javascript library="prototype"/>  
+  <g:javascript>
+    document.observe('dom:loaded', function() {
+
+      if ($('chargeable').checked) {
+        $('price').enable();
+      } else {
+        $('price').disable();
+      }
+
+      $('chargeable').observe('change', function() {
+        if ($('chargeable').checked) {
+          $('price').enable();
+        } else {
+          $('price').disable();
+          $('price').clear();
+        }
+      });
+
+    });
+  </g:javascript>
 </head>
 <body>
 <div class="body">
@@ -73,7 +94,7 @@
       <input type="hidden" name="id" value="${customizationChoiceInstance?.id}"/>
       <label for="label">Label:</label><g:textField name="label" value="${customizationChoiceInstance.label}"/>
       <label for="chargeable">Chargeable:</label><g:checkBox id="chargeable" name="chargeable" value="${customizationChoiceInstance?.chargeable}"/>
-      <label for="price">Price:</label><g:textField name="price" value="${customizationChoiceInstance.price}"/>
+      <label for="price">Price:</label><g:textField id="price" name="price" value="${customizationChoiceInstance.price}"/>
       <span class="button">
         <g:if test="${customizationChoiceInstance?.id == null}">
           <g:actionSubmit class="add" value="Add Choice" action="addChoice"/>
