@@ -18,6 +18,15 @@
     }
   </g:javascript>
   <g:javascript library="scriptaculous"/>
+<g:ifAllGranted role="ROLE_ADMIN">
+  <g:javascript>
+    document.observe('dom:loaded', function() {
+      Sortable.create('productCustomizations', {onUpdate:function() {
+          <g:remoteFunction action="sortCustomizations" params="'productId=${productInstance.id}&'+Sortable.serialize('productCustomizations')"/>
+        }});
+    });
+  </g:javascript>
+  </g:ifAllGranted>
   <script type="text/javascript" src="${resource(dir: 'js', file: 'lightbox.js')}"></script>
   <link rel="stylesheet" href="${resource(dir: 'css', file: 'lightbox.css')}" type="text/css" media="screen"/>
 </head>
@@ -35,21 +44,31 @@
 <div id="productContainer" class="span-20 last">
   <div id="productImage" class="span-7" style="text-align: center"><a href="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.fullSizeImage?.name)}" rel="lightbox"><img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.mediumImage?.name)}" width="250"><br/>Click to Enlarge</a></div>
   <div class="span-13 last">
-  <p>${fieldValue(bean: productInstance, field: 'description')}<br/><br/>
+  <p>${fieldValue(bean: productInstance, field: 'description')}</p>
     <g:form name="addToCartForm">
       <g:if test="${productInstance.prices.size() > 1}">
-        <g:select id="priceId" name="priceId" from="${productInstance.prices}"
-                optionValue="display" optionKey="id"/>
+        <p><g:select id="priceId" name="priceId" from="${productInstance.prices}"
+                optionValue="display" optionKey="id"/></p>
       </g:if>
       <g:else>
         <g:if test="${productInstance.prices.size() == 1}">
-          <g:hiddenField name="priceId" value="${productInstance.prices[0].id}"/>
+          <p><g:hiddenField name="priceId" value="${productInstance.prices[0].id}"/>
           <strong><g:formatNumber format="\$0.00" number="${productInstance.prices[0].price}"/></strong></p>
         </g:if>
         <g:else>
-          <strong>No Price Set!!!</strong>
+          <p><strong>No Price Set!!!</strong></p>
         </g:else>
       </g:else>
+
+      <g:if test="${productInstance.customizations}">
+        <h3>Options:<br/><span class="options-subtitle">Options marked * are required.</span></h3>
+        <ul id="productCustomizations">
+        <g:each in="${productInstance.customizations}" var="customization">
+          <li id="customization_${customization.id}" class="productCustomizationListItem"><g:renderCustomizationWidget customization="${customization}"/></li>
+        </g:each>
+        </ul>
+      </g:if>
+
       <g:hiddenField name="id" value="${productInstance.id}"/>
       <g:textField name="quantity" value="1"/>
       <g:submitToRemote name="addToCartButton"

@@ -1,4 +1,4 @@
-<%@ page import="com.mattstine.wendysstore.domain.ProductCategory" %>
+<%@ page import="com.mattstine.wendysstore.domain.Customization; com.mattstine.wendysstore.domain.ProductCategory" %>
 
 
 <html>
@@ -66,6 +66,21 @@
 
 
                                     
+
+                                </td>
+                            </tr>
+
+                        <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="customizations">Customizations:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean:productInstance,field:'customizations','errors')}">
+                                  <g:select id="customizations" name="customizations" from="${Customization.list()}"
+                                  value="${productInstance?.customizations}" optionValue="label" optionKey="id" multiple="true"
+                                />
+
+
+
 
                                 </td>
                             </tr>
