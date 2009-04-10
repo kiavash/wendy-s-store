@@ -7,6 +7,7 @@ class Product {
   Image fullSizeImage
   Image mediumImage
   Image thumbnailImage
+  List customizations
 
   static constraints = {    
     description(maxSize:1000)
