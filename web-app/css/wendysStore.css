@@ -32,3 +32,24 @@ thead th {
     background-color: #99ff33;
     color: #fff;
 }
+
+.logo {
+    text-align: center;
+}
+
+#productCustomizations {
+    list-style-type: none;
+}
+
+.productCustomizationListItem {
+    margin-bottom: 10px;
+}
+
+.required {
+    color: #FF339A;
+}
+
+.options-subtitle {
+    color: #FF339A;
+    font-size: small;
+}
