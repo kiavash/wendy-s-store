@@ -1,0 +1,2 @@
+<label for="customization${customization.id}">${customization.label}: </label>
+<g:checkBox id="customization${customization.id}" name="customization${customization.id}" value="true" checked="false"/> <g:if test="${customization.chargeable}">(<g:formatNumber format="\$0.00" number="${customization.price}"/>)</g:if>
