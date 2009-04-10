@@ -20,13 +20,13 @@ Just change the color-values to apply your own color-scheme.
 /*.navigation li.navigation_active { border-left-color: #555; }       /* Highlight border-color of active item */
 
 /* Sub navigation */
-.subnavigation li { background-color: #555; }                       /* Background-color */
-.subnavigation li a { border-color: #555; }                         /* Should be set to the same as the above */
-.subnavigation li a { color: #fff; }                                /* Text color */
-.subnavigation li a:hover { border-color: #fff; }                   /* Markings color of hovered item */
-.subnavigation li a:hover { color: #e0e0e0; }                       /* Text color of hovered item */
-.subnavigation li.subnavigation_active a { color: #e0e0e0; }        /* Text color of active item */
-.subnavigation li.subnavigation_active a { border-color: #e0e0e0; } /* Markings color of active item */
+.subnavigation li { background-color: #99ff33; }                       /* Background-color */
+.subnavigation li a { border-color: #99ff33; }                         /* Should be set to the same as the above */
+.subnavigation li a { color: #000; }                                /* Text color */
+.subnavigation li a:hover { border-color: #fd3399; }                   /* Markings color of hovered item */
+.subnavigation li a:hover { color: #000; }                       /* Text color of hovered item */
+.subnavigation li.subnavigation_active a { color: #000; }        /* Text color of active item */
+.subnavigation li.subnavigation_active a { border-color: #fd3399; } /* Markings color of active item */
 
 .navigation {
     /*list-style-type: none;*/
