@@ -1,7 +1,9 @@
 package com.mattstine.wendysstore.controllers
 
 import com.mattstine.wendysstore.domain.ProductCategory
+import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_ADMIN'])
 class ProductCategoryController {
 
   static navigation = [
