@@ -40,11 +40,15 @@
         <li><g:link controller="logout">Logout</g:link></li>
       </g:isLoggedIn>
     </ul>
+    <g:ifAllGranted role="ROLE_ADMIN">
+    <h2>Admin:</h2>
+      <nav:render/>
+      
+    </g:ifAllGranted>
   </div>
   <div id="main" class="span-20 last">
     <g:ifAllGranted role="ROLE_ADMIN">
       <div id="menu" class="span-20 last">
-        <nav:render/>
         <nav:renderSubItems/>
       </div>
     </g:ifAllGranted>
