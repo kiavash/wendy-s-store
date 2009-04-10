@@ -1,10 +1,13 @@
 package com.mattstine.wendysstore.controllers
 
 import com.mattstine.wendysstore.domain.Role
+import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+
 
 /**
  * Authority Controller.
  */
+@Secured(['ROLE_ADMIN'])
 class RoleController {
 
 	// the delete, save and update actions only accept POST requests

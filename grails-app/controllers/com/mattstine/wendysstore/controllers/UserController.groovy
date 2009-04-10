@@ -2,10 +2,12 @@ package com.mattstine.wendysstore.controllers
 
 import com.mattstine.wendysstore.domain.User
 import com.mattstine.wendysstore.domain.Role
+import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 
 /**
  * User controller.
  */
+@Secured(['ROLE_ADMIN'])
 class UserController {
 
 	def authenticateService
