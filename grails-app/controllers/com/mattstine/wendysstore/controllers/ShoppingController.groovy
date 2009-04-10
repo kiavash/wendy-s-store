@@ -1,9 +1,6 @@
 package com.mattstine.wendysstore.controllers
 
-import com.mattstine.wendysstore.domain.OrderItem
-import com.mattstine.wendysstore.domain.Product
-import com.mattstine.wendysstore.domain.ProductCategory
-import com.mattstine.wendysstore.domain.Price
+import com.mattstine.wendysstore.domain.*
 
 class ShoppingController {
 
@@ -27,11 +24,32 @@ class ShoppingController {
 
     def product = Product.get(params.id)
     def price = Price.get(params.priceId)
-    shoppingCartService.addToShoppingCart(new OrderItem(product: product, price: price), params.quantity.toInteger())
-    render """
-      ${product.name} has been added to your cart.
-      <script type="javascript">\$('ajaxMessage').setStyle({visibility: 'visible'});</script>
-      """
+
+    def orderItem = new OrderItem(product: product, price: price)
+
+    def errors = []
+
+    params.each {key, value ->
+      def matcher = key =~ /customization(.)/
+      if (matcher.matches()) {
+        def customizationId = matcher[0][1]
+        log.debug "${customizationId} -> ${value}"
+        def customization = Customization.get(customizationId.toLong())
+
+        if (customization.required && value == "") {
+          errors.add("${customization.label} is required!")
+        } else if (value != "") {
+          orderItem.addToCustomizationItems(CustomizationItem.getInstance(customization, value))
+        }
+      }
+    }
+
+    if (errors.size() == 0) {
+      shoppingCartService.addToShoppingCart(orderItem, params.quantity.toInteger())
+      render(template: 'productAdded', model: [product: product])
+    } else {
+      render(template: 'errors', model: [errors: errors])
+    }
   }
 
   def viewCart = {
@@ -41,8 +59,8 @@ class ShoppingController {
     if (modelMap.numberOfItems > 0) {
       def totalCharge = 0.00
 
-      shoppingCartService.getItems().each() { item ->
-        totalCharge += com.metasieve.shoppingcart.Shoppable.findByShoppingItem(item).price.price * shoppingCartService.getQuantity(item)
+      shoppingCartService.getItems().each() {item ->
+        totalCharge += com.metasieve.shoppingcart.Shoppable.findByShoppingItem(item).totalPrice * shoppingCartService.getQuantity(item)
       }
 
       modelMap.totalCharge = totalCharge
@@ -61,7 +79,7 @@ class ShoppingController {
   def deleteItemFromCart = {
     def orderItem = com.metasieve.shoppingcart.Shoppable.get(params.id)
     shoppingCartService.removeFromShoppingCart(orderItem, shoppingCartService.getQuantity(orderItem))
-    redirect(view: "viewCart")
+    redirect(action: "viewCart")
   }
 
   def checkout = {
@@ -74,12 +92,12 @@ class ShoppingController {
     def incrementalItemId = 1
     checkedOutItems.each() {
       url << "&item_name_${incrementalItemId}=${com.metasieve.shoppingcart.Shoppable.findByShoppingItem(it['item']).product.name}"
-      url << "&amount_${incrementalItemId}=${com.metasieve.shoppingcart.Shoppable.findByShoppingItem(it['item']).price.price}"
+      url << "&amount_${incrementalItemId}=${com.metasieve.shoppingcart.Shoppable.findByShoppingItem(it['item']).totalPrice}"
       url << "&quantity_${incrementalItemId}=${it['qty']}"
       incrementalItemId++
     }
 
-    redirect(url:url)
+    redirect(url: url)
 
   }
 }
