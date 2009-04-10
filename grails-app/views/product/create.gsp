@@ -5,7 +5,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
         <title>Create a New Product</title>
-      <gui:resources components="['richEditor']"/>
     </head>
     <body>
         
