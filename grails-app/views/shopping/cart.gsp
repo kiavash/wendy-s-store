@@ -26,7 +26,7 @@
       <g:set value="${it['qty']}" var="quantity"/>
       <tr>
         <td>
-         <strong>${orderItem.product.name}</strong><br/>${orderItem.price.description}<br/><br/>
+         <strong>${orderItem.product.name}</strong><br/>${orderItem.price.description} (<g:formatNumber format="\$0.00" number="${orderItem.price.price}"/>)<br/><br/>
 
           <strong>Options:</strong><br/><br/>
           <ul style="list-style-type: none">
