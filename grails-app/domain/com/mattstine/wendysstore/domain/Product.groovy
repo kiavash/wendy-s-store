@@ -9,8 +9,9 @@ class Product {
   Image thumbnailImage
   List customizations
 
-  static constraints = {    
-    description(maxSize:1000)
+  static constraints = {
+    name(blank:false)
+    description(blank:false,maxSize:1000)
     fullSizeImage(nullable:true)
     mediumImage(nullable:true)
     thumbnailImage(nullable:true)
