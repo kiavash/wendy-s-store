@@ -21,31 +21,34 @@ class ShoppingController {
   }
 
   def addProductToCart = {
-
+    def errors = []
     def product = Product.get(params.id)
     def price = Price.get(params.priceId)
-
     def orderItem = new OrderItem(product: product, price: price)
+    def quantity = params.quantity && params.quantity.trim() != "" ? params.quantity.toInteger() : null
 
-    def errors = []
+    if (quantity != null && quantity > 0) {
+      params.each {key, value ->
+        def matcher = key =~ /customization(.)/
+        if (matcher.matches()) {
+          def customizationId = matcher[0][1]
+          log.debug "${customizationId} -> ${value}"
+          def customization = Customization.get(customizationId.toLong())
 
-    params.each {key, value ->
-      def matcher = key =~ /customization(.)/
-      if (matcher.matches()) {
-        def customizationId = matcher[0][1]
-        log.debug "${customizationId} -> ${value}"
-        def customization = Customization.get(customizationId.toLong())
-
-        if (customization.required && value == "") {
-          errors.add("${customization.label} is required!")
-        } else if (value != "") {
-          orderItem.addToCustomizationItems(CustomizationItem.getInstance(customization, value))
+          if (customization.required && value == "") {
+            errors.add("${customization.label} is required!")
+          } else if (value != "") {
+            orderItem.addToCustomizationItems(CustomizationItem.getInstance(customization, value))
+          }
         }
       }
+
+    } else {
+      errors.add("Quantity must be greater than or equal to 1!")
     }
 
     if (errors.size() == 0) {
-      shoppingCartService.addToShoppingCart(orderItem, params.quantity.toInteger())
+      shoppingCartService.addToShoppingCart(orderItem, quantity)
       render(template: 'productAdded', model: [product: product])
     } else {
       render(template: 'errors', model: [errors: errors])
@@ -70,9 +73,14 @@ class ShoppingController {
   }
 
   def updateQuantity = {
-    def orderItem = com.metasieve.shoppingcart.Shoppable.get(params.id)
-    shoppingCartService.removeFromShoppingCart(orderItem, shoppingCartService.getQuantity(orderItem))
-    shoppingCartService.addToShoppingCart(orderItem, params.quantity.toInteger())
+    def quantity = params.quantity && params.quantity.trim() != "" ? params.quantity.toInteger() : null
+    if (quantity != null && quantity > 0) {
+      def orderItem = com.metasieve.shoppingcart.Shoppable.get(params.id)
+      shoppingCartService.removeFromShoppingCart(orderItem, shoppingCartService.getQuantity(orderItem))
+      shoppingCartService.addToShoppingCart(orderItem, quantity)
+    } else {
+      flash.message = "Quantity must be greater than or equal to 1!"
+    }
     redirect(action: "viewCart")
   }
 
