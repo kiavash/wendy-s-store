@@ -56,8 +56,7 @@
             <label for="customizations">Customizations:</label>
           </td>
           <td valign="top" class="value ${hasErrors(bean: productInstance, field: 'customizations', 'errors')}">
-            <g:select id="customizations" name="customizations" from="${Customization.list()}"
-                    value="${productInstance?.customizations}" optionValue="label" optionKey="id" multiple="true"/>
+            <g:render template="customizationsWidget" model="${[productInstance:productInstance]}"/>
           </td>
         </tr>
 
