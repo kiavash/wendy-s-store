@@ -4,7 +4,7 @@ import com.mattstine.wendysstore.domain.Customization
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 import com.mattstine.wendysstore.domain.CustomizationChoice
 
-@Secured(['ROLE_ADMIN'])
+@Secured (['ROLE_ADMIN'])
 class CustomizationController {
 
   static navigation = [
@@ -116,9 +116,13 @@ class CustomizationController {
   def addChoice = {
     def choice = new CustomizationChoice(params)
     def customization = Customization.get(params.customizationId)
-    customization.addToChoices(choice)
-    customization.save()
-    redirect(action: show, id: params.customizationId)
+    if (choice.validate()) {
+      customization.addToChoices(choice)
+      customization.save()
+      redirect(action: show, id: params.customizationId)
+    } else {
+      render(view: 'show', model: [customizationInstance:customization, customizationChoiceInstance:choice])
+    }
   }
 
   def deleteChoice = {
@@ -139,7 +143,11 @@ class CustomizationController {
   def updateChoice = {
     def choice = CustomizationChoice.get(params.id)
     choice.properties = params
-    choice.save()
+    if (choice.save()) {
     redirect(action: show, id: params.customizationId)
+    } else {
+      def customization = Customization.get(params.customizationId)
+      render(view: 'show', model: [customizationInstance:customization, customizationChoiceInstance:choice])
+    }
   }
 }

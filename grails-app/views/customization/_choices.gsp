@@ -1,5 +1,10 @@
 <h2>Manage Choices:</h2>
 <div class="dialog span-20 last" style="text-align: center">
+  <g:hasErrors bean="${customizationChoiceInstance}">
+      <div class="errors">
+        <g:renderErrors bean="${customizationChoiceInstance}" as="list"/>
+      </div>
+    </g:hasErrors>
   <g:form name="addChoiceForm" method="post">
     <input type="hidden" name="customizationId" value="${customizationInstance?.id}"/>
     <input type="hidden" name="id" value="${customizationChoiceInstance?.id}"/>

@@ -8,12 +8,16 @@ class Customization {
   Set choices
   Boolean required = false
 
-  static hasMany = [choices:CustomizationChoice]
+  static hasMany = [choices: CustomizationChoice]
 
   static constraints = {
-    price(nullable:true)
-  }
+    price(nullable: true,
+            scale: 2,
+            validator: { value, object ->
+              if (value != null && value < 0) return "price.invalid.negative"
 
-  
+              if (object.chargeable && value == null) return "price.null.with.chargeable"
+            })
+  }
 
 }

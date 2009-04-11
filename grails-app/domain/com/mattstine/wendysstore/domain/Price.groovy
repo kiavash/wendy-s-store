@@ -16,5 +16,8 @@ class Price {
     static transients = ['display']
 
     static constraints = {
+      price(scale:2, validator: {
+        if (it < 0) return "price.invalid.negative"
+      })
     }
 }

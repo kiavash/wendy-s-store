@@ -26,7 +26,7 @@ class ProductController {
   // the delete, save and update actions only accept POST requests
   static allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def list = {
     params.max = Math.min(params.max ? params.max.toInteger() : 10, 100)
     [productInstanceList: Product.list(params), productInstanceTotal: Product.count()]
@@ -43,7 +43,7 @@ class ProductController {
     else { return [productInstance: productInstance, priceInstance: priceInstance] }
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def uploadProductImage = {
     def f = request.getFile('newProductImage')
     if (!f.empty) {
@@ -101,16 +101,20 @@ class ProductController {
     }
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def addPrice = {
     def price = new Price(params)
     def product = Product.get(params.productId)
-    product.addToPrices(price)
-    product.save()
-    redirect(action: show, id: params.productId)
+    if (price.validate()) {
+      product.addToPrices(price)
+      product.save()
+      redirect(action: show, id: params.productId)
+    } else {
+      render(view: 'show', model: [productInstance: product, priceInstance: price])
+    }
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def deletePrice = {
     def product = Product.get(params.productId)
     def price = Price.get(params.id)
@@ -120,22 +124,26 @@ class ProductController {
     redirect(action: show, id: params.productId)
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def editPrice = {
     def priceInstance = Price.get(params.id)
     def productInstance = Product.get(params.productId)
     render(view: 'show', model: [productInstance: productInstance, priceInstance: priceInstance])
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def updatePrice = {
     def price = Price.get(params.id)
     price.properties = params
-    price.save()
-    redirect(action: show, id: params.productId)
+    if (price.save()) {
+      redirect(action: show, id: params.productId)
+    } else {
+      def product = Product.get(params.productId)
+      render(view: 'show', model: [productInstance: product, priceInstance: price])
+    }
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def delete = {
     def productInstance = Product.get(params.id)
     if (productInstance) {
@@ -155,7 +163,7 @@ class ProductController {
     }
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def edit = {
     def productInstance = Product.get(params.id)
 
@@ -168,7 +176,7 @@ class ProductController {
     }
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def update = {
     def productInstance = Product.get(params.id)
     if (productInstance) {
@@ -196,14 +204,14 @@ class ProductController {
     }
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def create = {
     def productInstance = new Product()
     productInstance.properties = params
     return ['productInstance': productInstance]
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def save = {
     def productInstance = new Product(params)
     if (!productInstance.hasErrors() && productInstance.save()) {
@@ -215,7 +223,7 @@ class ProductController {
     }
   }
 
-  @Secured(['ROLE_ADMIN'])
+  @Secured (['ROLE_ADMIN'])
   def sortCustomizations = {
 
     def productId = params.productId
@@ -223,7 +231,7 @@ class ProductController {
 
     def sortOrderMap = [:]
     def index = 0
-    sortOrder.each { customizationId ->
+    sortOrder.each {customizationId ->
       sortOrderMap[customizationId] = index
       index++
     }
@@ -232,7 +240,7 @@ class ProductController {
 
     def sortedCustomizationList = new ArrayList(product.customizations.size())
 
-    product.customizations.each { customization ->
+    product.customizations.each {customization ->
       sortedCustomizationList[sortOrderMap["${customization.id}"]] = customization
     }
 
