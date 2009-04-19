@@ -7,6 +7,8 @@ import groovy.xml.MarkupBuilder
 import org.springframework.dao.DataIntegrityViolationException
 import org.grails.plugins.imagetools.ImageTool
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import org.im4java.core.IMOperation
+import org.im4java.core.ConvertCmd
 
 
 class ProductController {
@@ -61,17 +63,26 @@ class ProductController {
       def file = new File("${imagePath}/${originalFilename}")
       f.transferTo(file)
 
-      def imageTool = new ImageTool()
-      imageTool.load(file.readBytes())
+      IMOperation imageOperation = new IMOperation()
+      imageOperation.addImage("${imagePath}/${originalFilename}")
+      imageOperation.resize(800)
+      imageOperation.addImage("${imagePath}/${largeFilename}")
+      ConvertCmd convertCmd = new ConvertCmd()
+      convertCmd.run(imageOperation)
 
-      imageTool.thumbnailSpecial(800, 600, 3, 2)
-      imageTool.writeResult("${imagePath}/${largeFilename}", "JPEG")
+      imageOperation = new IMOperation()
+      imageOperation.addImage("${imagePath}/${originalFilename}")
+      imageOperation.resize(500)
+      imageOperation.addImage("${imagePath}/${mediumFilename}")
+      convertCmd = new ConvertCmd()
+      convertCmd.run(imageOperation)
 
-      imageTool.thumbnailSpecial(250, 158, 3, 2)
-      imageTool.writeResult("${imagePath}/${mediumFilename}", "JPEG")
-
-      imageTool.thumbnailSpecial(192, 121, 3, 2)
-      imageTool.writeResult("${imagePath}/${thumbnailFilename}", "JPEG")
+      imageOperation = new IMOperation()
+      imageOperation.addImage("${imagePath}/${originalFilename}")
+      imageOperation.resize(230)
+      imageOperation.addImage("${imagePath}/${thumbnailFilename}")
+      convertCmd = new ConvertCmd()
+      convertCmd.run(imageOperation)
 
       def product = Product.get(params['id'])
       product.fullSizeImage = new Image(path: imagePath, name: largeFilename)
@@ -86,7 +97,7 @@ class ProductController {
         body {
           textarea {
             a(href: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.fullSizeImage.name), rel: 'lightbox') {
-              img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '250')
+              img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '500')
               br('Click to Enlarge')
             }
           }
