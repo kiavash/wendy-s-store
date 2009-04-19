@@ -7,20 +7,20 @@ import com.mattstine.wendysstore.domain.Role
  */
 class User {
 	static transients = ['pass']
-	static hasMany = [authorities: Role]
+	static hasMany = [authorities: Role, shippingAddresses:Address]
 	static belongsTo = Role
 
 	/** Username */
 	String username
 	/** User Real Name*/
-	String userRealName
+	String lastName
+    String firstName
 	/** MD5 Password */
 	String passwd
 	/** enabled */
 	boolean enabled
 
 	String email
-	boolean emailShow
 
 	/** description */
 	String description = ''
@@ -30,7 +30,8 @@ class User {
 
 	static constraints = {
 		username(blank: false, unique: true)
-		userRealName(blank: false)
+		lastName(blank: false)
+        firstName(blank: false)
 		passwd(blank: false)
 		enabled()
 	}
