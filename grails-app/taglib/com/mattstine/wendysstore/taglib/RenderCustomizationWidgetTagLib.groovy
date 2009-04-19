@@ -11,7 +11,7 @@ class RenderCustomizationWidgetTagLib {
   def renderCartCustomizationItem = {attrs, body ->
     def customizationItem = attrs.customizationItem
 
-    out << "${customizationItem.customization.label}"
+    out << "<strong>${customizationItem.customization.label}</strong>"
 
     def customizationPrice = 0
 
@@ -27,7 +27,13 @@ class RenderCustomizationWidgetTagLib {
       out << " (${formatNumber(format: '\$0.00', number: customizationPrice)})"
     }
 
-    out << ": ${attrs.customizationItem.value}"
+    out << ": "
+
+    if (customizationItem.customization.type == CustomizationType.LARGETEXT) {
+      out << "<br/>"
+    }
+
+    out << "${attrs.customizationItem.value}"
   }
 
 }
