@@ -7,7 +7,10 @@
         <title>Current Products</title>
     </head>
     <body>
-        
+        <div class="nav">
+		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
+		<span class="menuButton"><g:link class="create" action="create">New Product</g:link></span>
+	</div>
         <div class="body">
             <h1>Current Products:</h1>
             <g:if test="${flash.message}">
