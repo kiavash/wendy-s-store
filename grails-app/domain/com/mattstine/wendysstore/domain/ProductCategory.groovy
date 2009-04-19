@@ -2,7 +2,7 @@ package com.mattstine.wendysstore.domain
 class ProductCategory {
   String name
   ProductCategory parentCategory
-  Set products
+  SortedSet products
   Set subCategories
 
   static hasMany = [products:Product, subCategories:ProductCategory]
