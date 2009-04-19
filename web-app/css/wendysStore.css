@@ -1,44 +1,113 @@
 body {
-    background: url(../images/limedice.gif);
+    /*background: url(../images/white_dice.jpg);*/
+    font-family: Century Gothic, Lucida Console, Monaco, monospace;
+    /*background-color: #ff99cc;*/
+    
 }
+
+
+h2 {
+    margin-bottom: 0px;
+}
+
+body a {
+    text-decoration: none;
+    color: #000;
+}
+
+body a:hover {
+    color: #FF339A;
+}
+
+th, td, caption {padding:4px 4px 4px 4px;}
+
+
+thead th {
+    background:#ff99cc;
+    color: #fff;
+}
+
+.cartItemColumn {
+    width: 50%;
+}
+
+.cartOtherColumn {
+    vertical-align: top;
+}
+
+.rightJustify {
+    text-align: right;
+}
+
+
+
 
 #container {
     background-color: #fff;
-    padding: 10 10 10 10;
+    /*margin-top: 10px;*/
+    /*padding: 10px 10px 10px 10px;*/
+    /*border: black solid 1px;*/
+}
+
+#topBorder {
+    background: url(../images/scallop_top.jpg);
+    height: 36px;
+}
+
+#bottomBorder {
+    background: url(../images/scallop_bottom.jpg);
+    height: 36px;
+}
+
+#footBorder {
+    background: url(../images/scallop_top.jpg);
+    height: 36px;
+}
+
+#headerMessage {
+    height: 100px;
+    font-size: 3em;
+}
+
+#sidebar {
+    margin-top: 20px;
+}
+
+#main {
+    margin-top: 20px;
+}
+
+#header .buttonCell {
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 #footer {
     text-align: center;
 }
 
+#productContainer {
+    margin-top: 20px;
+}
+
 .product {
     text-align: center;
-    
+    /*padding-right: 25px;*/
 }
 
 .product-row {
+    /*border: #000 solid 1px;*/
     padding-top: 20;
 }
 
-.daisy {
-    background: url(../images/daisy_icon.png) no-repeat;
-    list-style-type: none;
-    text-indent: 30px;
-    height: 25px;
-    padding-top: 5px;
-}
-
-thead th {
-    background-color: #99ff33;
-    color: #fff;
-}
-
 .logo {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 #productCustomizations {
     list-style-type: none;
+    margin-left: 0px;
 }
 
 .productCustomizationListItem {
@@ -52,4 +121,34 @@ thead th {
 .options-subtitle {
     color: #FF339A;
     font-size: small;
+}
+
+#sidebar ul.menu {
+    list-style-type: none;
+    margin-left: 0px;    text-align: center;
+
+    
+}
+
+.sidebarHeading {
+    margin-bottom: 10px;
+}
+
+.indent {
+    padding-left: 10px;
+}
+
+#sidebar li.menuItem a {
+    text-decoration: none;
+    font-size: 1.4em;
+
+
+}
+
+.productImage {
+    border: #000 solid 1px;
+}
+
+#controlContainer {
+    text-align: center;
 }
