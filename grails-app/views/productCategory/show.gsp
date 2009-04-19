@@ -7,7 +7,11 @@
         <title>${fieldValue(bean:productCategoryInstance, field:'name')}</title>
     </head>
     <body>
-        
+        <div class="nav">
+		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
+		<span class="menuButton"><g:link class="list" action="list">Category List</g:link></span>
+		<span class="menuButton"><g:link class="create" action="create">New Category</g:link></span>
+	</div>
         <div class="body">
             <h1>${fieldValue(bean:productCategoryInstance, field:'name')}</h1>
             <g:if test="${flash.message}">
