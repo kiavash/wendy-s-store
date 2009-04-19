@@ -4,7 +4,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="main"/>
   <title>Show Customization</title>
-  <g:javascript library="prototype"/>  
   <g:javascript>
     document.observe('dom:loaded', function() {
 
@@ -27,6 +26,11 @@
   </g:javascript>
 </head>
 <body>
+<div class="nav">
+		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
+		<span class="menuButton"><g:link class="list" action="list">Customization List</g:link></span>
+		<span class="menuButton"><g:link class="create" action="create">New Customization</g:link></span>
+	</div>
 <div class="body">
   <h1>Show Customization</h1>
   <g:if test="${flash.message}">
