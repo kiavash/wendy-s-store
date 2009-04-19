@@ -5,9 +5,7 @@
     <meta name="layout" content="main" />
   </head>
   <body>
-  <p>
-    <g:productCategoryBreadcrumbs category="${category}"/>
-  </p>
+  <h3 class="indent"><g:productCategoryBreadcrumbs category="${category}"/></h3>
     <ul>
       <g:each in="${category.subCategories}" var="subCategory">
         <li><g:link controller="shopping" action="category" id="${subCategory.id}">${subCategory.name}</g:link> </li>
