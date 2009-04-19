@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<%@ page import="com.mattstine.wendysstore.domain.ProductCategory" %>
+<%@ page import="com.mattstine.wendysstore.domain.Page; com.mattstine.wendysstore.domain.ProductCategory" %>
 <html>
 <head>
   <title>Duck Duck Goose Designs - <g:layoutTitle/></title>
@@ -40,6 +40,9 @@
         <li class="menuItem menuItemMouseOut"><g:link controller="register">My Account</g:link></li>
         <li class="menuItem menuItemMouseOut"><g:link controller="logout">Logout</g:link></li>
       </g:isLoggedIn>
+      <g:each in="${Page.findAll()}" var="page">
+        <li class="menuItem menuItemMouseOut"><g:link controller="page" action="show" id="${page.id}">${page.sidebarLinkTitle}</g:link></li>
+      </g:each>
     </ul>
     <g:ifAllGranted role="ROLE_ADMIN">
       <img src="${createLinkTo(dir: 'images', file: 'admin.png')}" alt="Administration" class="sidebarHeading"/>
@@ -47,6 +50,7 @@
         <li class="menuItem menuItemMouseOut"><g:link controller="product">Manage Products</g:link></li>
         <li class="menuItem menuItemMouseOut"><g:link controller="productCategory">Manage Categories</g:link></li>
         <li class="menuItem menuItemMouseOut"><g:link controller="customization">Manage Customizations</g:link></li>
+        <li class="menuItem menuItemMouseOut"><g:link controller="page">Manage Pages</g:link></li>        
         <li class="menuItem menuItemMouseOut"><g:link controller="user">Manage Users</g:link></li>
         <li class="menuItem menuItemMouseOut"><g:link controller="role">Manage Roles</g:link></li>
       </ul>
