@@ -17,7 +17,6 @@
       });
     }
   </g:javascript>
-  <g:javascript library="scriptaculous"/>
   <g:ifAllGranted role="ROLE_ADMIN">
     <g:javascript>
     document.observe('dom:loaded', function() {
@@ -31,34 +30,27 @@
   <link rel="stylesheet" href="${resource(dir: 'css', file: 'lightbox.css')}" type="text/css" media="screen"/>
 </head>
 <body>
-<p>
-  <g:productCategoryBreadcrumbs category="${productInstance.category}"/>
-</p>
+<g:ifAllGranted role="ROLE_ADMIN">
+  <div class="nav">
+    <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}">Home</a></span>
+    <span class="menuButton"><g:link class="list" action="list">Product List</g:link></span>
+    <span class="menuButton"><g:link class="create" action="create">New Product</g:link></span>
+  </div>
+</g:ifAllGranted>
+<h3><g:productCategoryBreadcrumbs category="${productInstance.category}"/></h3>
 <div id="product-head" class="span-20 last">
   <h2>${fieldValue(bean: productInstance, field: 'name')}</h2>
   <g:if test="${flash.message}">
-    <div class="message">${flash.message}</div>
+    <div class="notice">${flash.message}</div>
   </g:if>
-  <div id="ajaxMessage" class="message" style="visibility: hidden"></div>
+  <div id="ajaxMessage" class="notice" style="visibility: hidden"></div>
 </div>
+<div id="productImage" class="span-20 last" style="text-align: center"><a href="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.fullSizeImage?.name)}" rel="lightbox"><img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.mediumImage?.name)}" width="500" class="productImage"><br/>Click to Enlarge</a></div>
 <div id="productContainer" class="span-20 last">
-  <div id="productImage" class="span-7" style="text-align: center"><a href="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.fullSizeImage?.name)}" rel="lightbox"><img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.mediumImage?.name)}" width="250"><br/>Click to Enlarge</a></div>
-  <div class="span-13 last">
-    <p>${fieldValue(bean: productInstance, field: 'description')}</p>
+  <div id="productDescription" class="prepend-4 span-12 append-4 last"><p>${fieldValue(bean: productInstance, field: 'description')}</p></div>
+
+  <div id="productOptions" class="prepend-4 span-12 append-4 last">
     <g:form name="addToCartForm">
-      <g:if test="${productInstance.prices.size() > 1}">
-        <p><g:select id="priceId" name="priceId" from="${productInstance.prices}"
-                optionValue="display" optionKey="id"/></p>
-      </g:if>
-      <g:else>
-        <g:if test="${productInstance.prices.size() == 1}">
-          <p><g:hiddenField name="priceId" value="${productInstance.prices[0].id}"/>
-            <strong><g:formatNumber format="\$0.00" number="${productInstance.prices[0].price}"/></strong></p>
-        </g:if>
-        <g:else>
-          <p><strong>No Price Set!!!</strong></p>
-        </g:else>
-      </g:else>
 
       <g:if test="${productInstance.customizations}">
         <h3>Options:<br/><span class="options-subtitle">Options marked * are required.</span></h3>
@@ -69,14 +61,32 @@
         </ul>
       </g:if>
 
+      <p><label>Price</label><br/>
+        <g:if test="${productInstance.prices.size() > 1}">
+          <g:select id="priceId" name="priceId" from="${productInstance.prices}"
+                  optionValue="display" optionKey="id"/>
+        </g:if>
+        <g:else>
+          <g:if test="${productInstance.prices.size() == 1}">
+            <g:hiddenField name="priceId" value="${productInstance.prices[0].id}"/>
+            <strong><g:formatNumber format="\$0.00" number="${productInstance.prices[0].price}"/></strong>
+          </g:if>
+          <g:else>
+            <strong>No Price Set!!!</strong>
+          </g:else>
+        </g:else>
+      </p>
+
+      <p><label for="quantity">Quantity</label><br/><g:textField name="quantity" value="1" size="3"/></p>
+
       <g:hiddenField name="id" value="${productInstance.id}"/>
-      <g:textField name="quantity" value="1"/>
       <g:submitToRemote name="addToCartButton"
               value="Add to Cart"
               update="ajaxMessage"
               url="[controller:'shopping',action:'addProductToCart']"/>
     </g:form>
   </div>
+
 </div>
 <g:ifAllGranted role="ROLE_ADMIN">
   <div id="buttonContainer" class="span-20 last">
@@ -91,7 +101,7 @@
       <g:form name="uploadProductImageForm" method="post" action="uploadProductImage" enctype="multipart/form-data">
         <input type="hidden" name="id" value="${productInstance?.id}"/>
         <input type="file" name="newProductImage"/>
-        <span class="button"><input class="add" type="button" name="uploadImage" value="Upload Image" onclick="submitForm()"/></span>
+        <input class="add" type="button" name="uploadImage" value="Upload Image" onclick="submitForm()"/>
       </g:form>
 
     </div>
