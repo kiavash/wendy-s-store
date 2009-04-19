@@ -1,10 +1,13 @@
 package com.mattstine.wendysstore.controllers
 
 import com.mattstine.wendysstore.domain.*
+import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 
 class ShoppingController {
 
+  def shoppingService
   def shoppingCartService
+  def authenticateService
 
   def index = { }
 
@@ -60,16 +63,20 @@ class ShoppingController {
     modelMap.numberOfItems = shoppingCartService.getItems()?.size()
 
     if (modelMap.numberOfItems > 0) {
-      def totalCharge = 0.00
-
-      shoppingCartService.getItems().each() {item ->
-        totalCharge += com.metasieve.shoppingcart.Shoppable.findByShoppingItem(item).totalPrice * shoppingCartService.getQuantity(item)
-      }
-
+      def totalCharge = calculateTotalChargeForCart()
       modelMap.totalCharge = totalCharge
     }
 
     render(view: "cart", model: modelMap)
+  }
+
+  def calculateTotalChargeForCart() {
+    def totalCharge = 0.00
+
+    shoppingCartService.getItems().each() {item ->
+      totalCharge += com.metasieve.shoppingcart.Shoppable.findByShoppingItem(item).totalPrice * shoppingCartService.getQuantity(item)
+    }
+    return totalCharge
   }
 
   def updateQuantity = {
@@ -90,6 +97,13 @@ class ShoppingController {
     redirect(action: "viewCart")
   }
 
+  @Secured (['ROLE_USER'])
+  def prepareOrder = {
+    def user = authenticateService.userDomain()
+    user = User.get(user.id)
+    [totalCharge: calculateTotalChargeForCart(), person: user]
+  }
+
   def checkout = {
 
     def checkedOutItems = shoppingCartService.checkOut()
@@ -107,5 +121,34 @@ class ShoppingController {
 
     redirect(url: url)
 
+  }
+
+  def showShippingAddress = {
+    def address = Address.get(params.id)
+    render(template: 'shippingAddress', model: [address: address])
+  }
+
+  @Secured (['ROLE_ADMIN'])
+  def sortProducts = {
+    TreeMap rowMap = new TreeMap()
+
+    params.each {key, value ->
+      def matcher = key =~ /productRow(.*)\[\]/
+      if (matcher.matches()) {
+        def rowId = matcher[0][1]
+        rowMap[rowId] = value
+      }
+    }
+
+    def productIds = []
+    rowMap.values().each { row ->
+      row.each {
+        productIds << it.toLong() 
+      }
+    }
+
+    shoppingService.saveSortOrder(productIds)
+
+    render("Product sort order saved!")
   }
 }
