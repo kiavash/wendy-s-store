@@ -21,7 +21,8 @@
 				<tr>
 					<g:sortableColumn property="id" title="Id" />
 					<g:sortableColumn property="username" title="Login Name" />
-					<g:sortableColumn property="userRealName" title="Full Name" />
+					<g:sortableColumn property="firstName" title="First Name" />
+                    <g:sortableColumn property="firstName" title="Last Name" />
 					<g:sortableColumn property="enabled" title="Enabled" />
 					<g:sortableColumn property="description" title="Description" />
 					<th>&nbsp;</th>
@@ -32,7 +33,8 @@
 				<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 					<td>${person.id}</td>
 					<td>${person.username?.encodeAsHTML()}</td>
-					<td>${person.userRealName?.encodeAsHTML()}</td>
+					<td>${person.firstName?.encodeAsHTML()}</td>
+                    <td>${person.lastName?.encodeAsHTML()}</td>                  
 					<td>${person.enabled?.encodeAsHTML()}</td>
 					<td>${person.description?.encodeAsHTML()}</td>
 					<td class="actionButtons">

@@ -31,8 +31,13 @@
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Full Name:</td>
-					<td valign="top" class="value">${person.userRealName?.encodeAsHTML()}</td>
+					<td valign="top" class="name">First Name:</td>
+					<td valign="top" class="value">${person.firstName?.encodeAsHTML()}</td>
+				</tr>
+
+                <tr class="prop">
+					<td valign="top" class="name">Last Name:</td>
+					<td valign="top" class="value">${person.lastName?.encodeAsHTML()}</td>
 				</tr>
 
 				<tr class="prop">
@@ -48,11 +53,6 @@
 				<tr class="prop">
 					<td valign="top" class="name">Email:</td>
 					<td valign="top" class="value">${person.email?.encodeAsHTML()}</td>
-				</tr>
-
-				<tr class="prop">
-					<td valign="top" class="name">Show Email:</td>
-					<td valign="top" class="value">${person.emailShow}</td>
 				</tr>
 
 				<tr class="prop">

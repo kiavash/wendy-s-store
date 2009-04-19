@@ -33,9 +33,16 @@
 					</tr>
 
 					<tr class="prop">
-						<td valign="top" class="name"><label for="userRealName">Full Name:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'userRealName','errors')}">
-							<input type="text" id="userRealName" name="userRealName" value="${person.userRealName?.encodeAsHTML()}"/>
+						<td valign="top" class="name"><label for="firstName">First Name:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'firstName','errors')}">
+							<input type="text" id="firstName" name="firstName" value="${person.firstName?.encodeAsHTML()}"/>
+						</td>
+					</tr>
+
+                    <tr class="prop">
+						<td valign="top" class="name"><label for="lastName">Last Name:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'lastName','errors')}">
+							<input type="text" id="lastName" name="lastName" value="${person.lastName?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
@@ -64,13 +71,6 @@
 						<td valign="top" class="name"><label for="email">Email:</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'email','errors')}">
 							<input type="text" id="email" name="email" value="${person.email?.encodeAsHTML()}"/>
-						</td>
-					</tr>
-
-					<tr class="prop">
-						<td valign="top" class="name"><label for="emailShow">Show Email:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'emailShow','errors')}">
-							<g:checkBox name="emailShow" value="${person.emailShow}"/>
 						</td>
 					</tr>
 
