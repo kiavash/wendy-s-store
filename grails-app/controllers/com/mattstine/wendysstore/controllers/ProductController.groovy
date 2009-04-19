@@ -5,7 +5,6 @@ import com.mattstine.wendysstore.domain.Price
 import com.mattstine.wendysstore.domain.Product
 import groovy.xml.MarkupBuilder
 import org.springframework.dao.DataIntegrityViolationException
-import org.grails.plugins.imagetools.ImageTool
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 import org.im4java.core.IMOperation
 import org.im4java.core.ConvertCmd
