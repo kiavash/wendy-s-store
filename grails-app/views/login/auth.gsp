@@ -1,75 +1,42 @@
+<html>
 <head>
-<meta name='layout' content='main' />
+<meta name="layout" content="main" />
 <title>Login</title>
-<style type='text/css' media='screen'>
-#login {
-	margin:15px 0px; padding:0px;
-	text-align:center;
-}
-#login .inner {
-	width:260px;
-	margin:0px auto;
-	text-align:left;
-	padding:10px;
-	border-top:1px dashed #499ede;
-	border-bottom:1px dashed #499ede;
-	background-color:#EEF;
-}
-#login .inner .fheader {
-	padding:4px;margin:3px 0px 3px 0;color:#2e3741;font-size:14px;font-weight:bold;
-}
-#login .inner .cssform p {
-	clear: left;
-	margin: 0;
-	padding: 5px 0 8px 0;
-	padding-left: 105px;
-	border-top: 1px dashed gray;
-	margin-bottom: 10px;
-	height: 1%;
-}
-#login .inner .cssform input[type='text'] {
-	width: 120px;
-}
-#login .inner .cssform label {
-	font-weight: bold;
-	float: left;
-	margin-left: -105px;
-	width: 100px;
-}
-#login .inner .login_message {color:red;}
-#login .inner .text_ {width:120px;}
-#login .inner .chk {height:12px;}
-</style>
 </head>
-
 <body>
-	<div id='login'>
-		<div class='inner'>
-			<g:if test='${flash.message}'>
-			<div class='login_message'>${flash.message}</div>
+	<div id="login" class="prepend-5 span-10 append-5">
+		<div id="form">
+			<g:if test="${flash.message}">
+			<div class="notice">${flash.message}</div>
 			</g:if>
-			<div class='fheader'>Please Login..</div>
-			<form action='${postUrl}' method='POST' id='loginForm' class='cssform'>
+			<h2>Please Login..</h2>
+			<form action="${postUrl}" method="POST" id="loginForm">
+                <fieldset>
 				<p>
-					<label for='j_username'>Login ID</label>
-					<input type='text' class='text_' name='j_username' id='j_username' value='${request.remoteUser}' />
+					<label for="j_username">Username</label>
+					<input type="text" class="text" name="j_username" id="j_username" value="${request.remoteUser}" />
 				</p>
 				<p>
-					<label for='j_password'>Password</label>
-					<input type='password' class='text_' name='j_password' id='j_password' />
+					<label for="j_password">Password</label>
+					<input type="password" class="text" name="j_password" id="j_password" />
 				</p>
 				<p>
-					<label for='remember_me'>Remember me</label>
-					<input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me'
-					<g:if test='${hasCookie}'>checked='checked'</g:if> />
+					<label for="remember_me">Remember me!</label><br/>
+					<input type="checkbox" name="_spring_security_remember_me" id="remember_me"
+					<g:if test="${hasCookie}">checked="checked"</g:if> />
 				</p>
 				<p>
-					<input type='submit' value='Login' />
+					<input type="submit" value="Login" />
 				</p>
+
+                <p>
+                  <g:link controller="register">Register for an Account</g:link>
+                </p>
+                </fieldset>
 			</form>
 		</div>
 	</div>
-<script type='text/javascript'>
+<script type="text/javascript">
 <!--
 (function(){
 	document.forms['loginForm'].elements['j_username'].focus();
@@ -77,3 +44,4 @@
 // -->
 </script>
 </body>
+</html>
