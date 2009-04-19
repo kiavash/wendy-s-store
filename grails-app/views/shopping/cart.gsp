@@ -5,7 +5,7 @@
   <meta name="layout" content="main"/>
 </head>
 <body>
-<div class="span-20 last">
+<div class="prepend-2 span-16 append-2 last">
   <h2>Shopping Cart</h2>
   <g:if test="${flash.message}">
     <div class="errors">${flash.message}</div>
@@ -17,9 +17,9 @@
     <table>
       <thead>
       <tr>
-        <th>Item</th>
+        <th class="cartItemColumn">Item</th>
         <th>Quantity</th>
-        <th style="text-align: right">Price</th>
+        <th class="rightJustify">Price</th>
         <th>&nbsp;</th>
       </tr>
       </thead>
@@ -28,7 +28,7 @@
         <g:set value="${com.metasieve.shoppingcart.Shoppable.findByShoppingItem(it['item'])}" var="orderItem"/>
         <g:set value="${it['qty']}" var="quantity"/>
         <tr>
-          <td>
+          <td class="cartItemColumn">
             <strong>${orderItem.product.name}</strong><br/>${orderItem.price.description} (<g:formatNumber format="\$0.00" number="${orderItem.price.price}"/>)<br/><br/>
 
             <strong>Options:</strong><br/><br/>
@@ -38,17 +38,17 @@
               </g:each>
             </ul>
           </td>
-          <td style="vertical-align:top">
+          <td class="cartOtherColumn">
             <g:form controller="shopping" action="updateQuantity">
               <g:hiddenField name="id" value="${item.id}"/>
-              <g:textField name="quantity" value="${quantity}"/>
+              <g:textField name="quantity" value="${quantity}" size="3"/>
               <g:submitButton name="updateQuantityButton" value="Update"/>
             </g:form>
           </td>
-          <td style="text-align: right; vertical-align: top; padding-top: 10px">
+          <td class="cartOtherColumn rightJustify">
             <g:formatNumber format="\$0.00" number="${orderItem.totalPrice * quantity}"/>
           </td>
-          <td style="vertical-align: top">
+          <td class="cartOtherColumn rightJustify">
             <g:form controller="shopping" action="deleteItemFromCart">
               <g:hiddenField name="id" value="${item.id}"/>
               <g:submitButton name="deleteItemFromCartButton" value="Delete"/>
@@ -64,8 +64,8 @@
       </tr>
       </tbody>
     </table>
-    <g:form controller="shopping" action="checkout">
-      <g:submitButton value="Checkout" name="checkoutButton"/>
+    <g:form controller="shopping" action="prepareOrder">
+      <p><g:submitButton value="Checkout" name="checkoutButton"/></p>
     </g:form>
   </g:else>
 </div>
