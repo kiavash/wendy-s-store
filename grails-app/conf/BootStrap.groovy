@@ -64,7 +64,7 @@ class BootStrap {
            p.category = c6
            p.save()
 
-           new Role(authority:"ROLE_USER", description:"Default Role for Customer Registration").save()
+           def roleUser = new Role(authority:"ROLE_USER", description:"Default Role for Customer Registration").save()
            def roleAdmin = new Role(authority:"ROLE_ADMIN", description:"Administrator Role").save()
 
            def md5Pass = authenticateService.encodePassword("password")
@@ -74,7 +74,7 @@ class BootStrap {
                     passwd:md5Pass,
                     enabled:true,
                     email:"matt@mattstine.com",
-                    description:"Me").addToAuthorities(roleAdmin).save()
+                    description:"Me").addToAuthorities(roleAdmin).addToAuthorities(roleUser).save()
 
 
            def font = new Customization(label:"Font", type:CustomizationType.CHOICESET)
