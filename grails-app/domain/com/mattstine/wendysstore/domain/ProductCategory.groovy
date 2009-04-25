@@ -1,16 +1,18 @@
 package com.mattstine.wendysstore.domain
-class ProductCategory {
+class ProductCategory implements Comparable {
   String name
   ProductCategory parentCategory
   SortedSet products
-  Set subCategories
+  SortedSet subCategories
   Long sortIndex
+  Image image
 
   static hasMany = [products: Product, subCategories: ProductCategory]
 
   static constraints = {
     parentCategory(nullable: true)
     sortIndex(nullable: true)
+    image(nullable:true)
   }
 
   static mapping = {
@@ -19,6 +21,10 @@ class ProductCategory {
   }
 
   static transients = ['breadcrumbs']
+
+  int compareTo(obj) {
+    sortIndex.compareTo(obj.sortIndex)
+  }
 
   def getBreadcrumbs() {
     def out = ""
