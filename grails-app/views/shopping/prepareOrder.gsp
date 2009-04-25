@@ -5,19 +5,23 @@
   <meta name="layout" content="main"/>
   <g:javascript library="radiogroup"/>
   <g:javascript>
-    document.observe('dom:loaded', function() {
-      $('shippingAddress').disable();
-
-      $('shippingAddress').observe('change', function() {
-        if ($F('shippingAddress') != '') {
-          new Ajax.Updater('shippingAddressView','<g:createLink action="showShippingAddress"/>', {
+    function updateShippingAddressView() {
+      new Ajax.Updater('shippingAddressView','<g:createLink action="showShippingAddress"/>', {
             parameters: { id: $F('shippingAddress')},
             onComplete: function(transport) {
                 if (!$('shippingAddressView').visible()) {
                   $('shippingAddressView').blindDown();
                 }
             }
-          });          
+      });
+    }
+
+    document.observe('dom:loaded', function() {
+      $('shippingAddress').disable();
+
+      $('shippingAddress').observe('change', function() {
+        if ($F('shippingAddress') != '') {
+          updateShippingAddressView();
         } else {
           $('shippingAddressView').blindUp();
         }
@@ -29,9 +33,11 @@
           var deliveryMethod = $RF('prepareOrderForm', 'deliveryMethod');
           if (deliveryMethod == 1) {
             $('shippingAddress').disable();
-            $('shippingAddress').selectedIndex = 0;
-            $('shippingAddressView').blindUp();  
+            $('shippingAddressView').blindUp();
           } else {
+            if ($('shippingAddress').selectedIndex != 0) {
+              updateShippingAddressView();
+            }
             $('shippingAddress').enable();
           }
 
@@ -95,7 +101,12 @@
         </g:radioGroup></p>
 
       <p><label for="shippingAddress">Shipping Address</label><br/>
-        <g:select name="shippingAddress" from="${person.shippingAddresses}" optionKey="id" optionValue="name" noSelection="['':'Select a value...']"/> (<g:link controller="register" action="addShippingAddress" params="${[userId:person.id]}">Add Shipping Address</g:link>)</p>
+        <select id="shippingAddress" name="shippingAddress">
+          <option value="">Select a value...</option>
+          <g:each in="${person.shippingAddresses}" var="shippingAddress">
+            <option value="${shippingAddress.id}" <g:if test="${shippingAddress.defaultAddress}">selected</g:if>>${shippingAddress.name}</option>
+          </g:each>
+        </select> (<g:link controller="register" action="addShippingAddress" params="${[userId:person.id]}">Add Shipping Address</g:link>)</p>
 
       <div id="shippingAddressView" style="display:none"></div>
 
