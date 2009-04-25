@@ -7,6 +7,7 @@ hibernate {
 environments {
   development {
     dataSource {
+      dialect = org.hibernate.dialect.MySQLInnoDBDialect
       pooled = true
       driverClassName = "com.mysql.jdbc.Driver"
       username = "root"
@@ -17,6 +18,7 @@ environments {
   }
   test {
     dataSource {
+      dialect = org.hibernate.dialect.MySQLInnoDBDialect
       pooled = true
       driverClassName = "com.mysql.jdbc.Driver"
       username = "root"
@@ -27,6 +29,7 @@ environments {
   }
   production {
     dataSource {
+      dialect = org.hibernate.dialect.MySQLInnoDBDialect      
       pooled = false
       dbCreate = "update"
       jndiName = "java:comp/env/jdbc/WendysStoreProdDB"
