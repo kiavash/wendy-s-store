@@ -35,7 +35,7 @@
       <div id="headerMessage" class="span-9">Grand Opening!</div>
       <div id="homeButtom" class="span-3 buttonCell"><g:link controller="home"><img src="${createLinkTo(dir: 'images', file: 'homeButton.png')}" alt="Home"/></g:link></div>
       <div id="cartButton" class="span-3 buttonCell"><g:link controller="shopping" action="viewCart"><img src="${createLinkTo(dir: 'images', file: 'cartButton.png')}" alt="Cart"/></g:link></div>
-      <div id="contactUsButton" class="span-3 last buttonCell"><img src="${createLinkTo(dir: 'images', file: 'contactUsButton.png')}" alt="Contact Us"/></div>
+      <div id="contactUsButton" class="span-3 last buttonCell"><g:link controller="contactUs"><img src="${createLinkTo(dir: 'images', file: 'contactUsButton.png')}" alt="Contact Us"/></g:link></div>
     </div>
   </div>
   <div id="bottomBorder" class="span-24">&nbsp;</div>    
@@ -68,6 +68,7 @@
         <li class="menuItem"><g:link controller="page">Manage Pages</g:link></li>
         <li class="menuItem"><g:link controller="user">Manage Users</g:link></li>
         <li class="menuItem"><g:link controller="role">Manage Roles</g:link></li>
+        <li class="menuItem"><g:link controller="contactUs" action="showMessages">View Contact Us Messages</g:link></li>        
       </ul>
     </g:ifAllGranted>
   </div>
