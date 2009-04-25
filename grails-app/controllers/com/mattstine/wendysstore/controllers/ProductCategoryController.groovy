@@ -2,16 +2,18 @@ package com.mattstine.wendysstore.controllers
 
 import com.mattstine.wendysstore.domain.ProductCategory
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import com.mattstine.wendysstore.domain.Image
+import groovy.xml.MarkupBuilder
 
-@Secured(['ROLE_ADMIN'])
+@Secured (['ROLE_ADMIN'])
 class ProductCategoryController {
 
   static navigation = [
-          title : 'Manage Categories',
-          action : 'index',
-          subItems : [
-                  [action:'list',title: 'List Categories'],
-                  [action:'create', title: 'New Category']
+          title: 'Manage Categories',
+          action: 'index',
+          subItems: [
+                  [action: 'list', title: 'List Categories'],
+                  [action: 'create', title: 'New Category']
 
           ]
   ]
@@ -127,7 +129,7 @@ class ProductCategoryController {
     params['productCategoryMenu[]'].each {
       categoryIds << it.toLong()
     }
-    
+
     def categoriesToSort = ProductCategory.findAllByIdInList(categoryIds)
 
     def categoryMap = [:]
@@ -147,6 +149,45 @@ class ProductCategoryController {
 
     categoriesToSort.each {
       it.save()
+    }
+  }
+
+  @Secured (['ROLE_ADMIN'])
+  def uploadCategoryImage = {
+    def f = request.getFile('newCategoryImage')
+    if (!f.empty) {
+
+      def imagePath = grailsApplication.config.store.productImages.location
+
+      //Create unique name for this image set based on current timestamp
+      def name = "image" + new Date().getTime()
+
+      def originalFilename = "${name}.jpg"
+
+      def file = new File("${imagePath}/${originalFilename}")
+      f.transferTo(file)
+
+      def category = ProductCategory.get(params['id'])
+      def image = new Image(path: imagePath, name: originalFilename)
+      category.image = image
+      category.save()
+
+      def writer = new StringWriter()
+      def xml = new MarkupBuilder(writer)
+
+      xml.html {
+        body {
+          textarea {
+            img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: category.image.name), width: '200')
+          }
+        }
+      }
+
+      render writer.toString()
+    }
+    else {
+      flash.message = 'file cannot be empty'
+      redirect(action: show)
     }
   }
 }
