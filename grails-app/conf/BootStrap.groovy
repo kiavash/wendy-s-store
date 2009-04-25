@@ -20,10 +20,10 @@ class BootStrap {
 //           def c2 = new com.mattstine.wendysstore.domain.ProductCategory(name:"Birthday Invitations").save()
 //           def c3 = new com.mattstine.wendysstore.domain.ProductCategory(name:"Note Cards").save()
 
-           def c4 = new ProductCategory(name:"Invitations")
+           def c4 = new ProductCategory(name:"Invitations").save()
 
-           def c5 = new ProductCategory(name:"Girls")
-           def c6 = new ProductCategory(name:"Boys")
+           def c5 = new ProductCategory(name:"Girls").save()
+           def c6 = new ProductCategory(name:"Boys").save()
 
            c4.addToSubCategories(c5)
            c5.parentCategory = c4
