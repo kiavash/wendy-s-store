@@ -108,4 +108,22 @@ class PageController {
 //    log.debug(params.text.getClass())
     render(template: 'textile', model: [text: params.text])
   }
+
+  def sortMenu = {
+    def sortOrder = params['pageMenu[]']
+
+    def sortOrderMap = [:]
+    def index = 0
+    sortOrder.each {pageId ->
+      sortOrderMap[pageId] = index
+      index++
+    }
+
+    def pages = Page.getAll()
+
+    pages.each { page ->
+      page.sortIndex = sortOrderMap["${page.id}"]
+      page.save()
+    }
+  }
 }

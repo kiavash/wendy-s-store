@@ -119,4 +119,34 @@ class ProductCategoryController {
       render(view: 'create', model: [productCategoryInstance: productCategoryInstance])
     }
   }
+
+
+  def sortMenu = {
+
+    def categoryIds = []
+    params['productCategoryMenu[]'].each {
+      categoryIds << it.toLong()
+    }
+    
+    def categoriesToSort = ProductCategory.findAllByIdInList(categoryIds)
+
+    def categoryMap = [:]
+    def sortIndexList = []
+
+    categoriesToSort.each {
+      categoryMap[it.id] = it
+      sortIndexList << it.sortIndex
+    }
+
+    sortIndexList.sort()
+    sortIndexList = sortIndexList.reverse()
+
+    categoryIds.each {
+      categoryMap[it].sortIndex = sortIndexList.pop()
+    }
+
+    categoriesToSort.each {
+      it.save()
+    }
+  }
 }
