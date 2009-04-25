@@ -147,8 +147,34 @@ class ShoppingController {
       }
     }
 
-    shoppingService.saveSortOrder(productIds)
+    shoppingService.saveProductSortOrder(productIds)
 
     render("Product sort order saved!")
+  }
+
+  @Secured (['ROLE_ADMIN'])
+  def sortCategories = {
+    TreeMap rowMap = new TreeMap()
+
+    params.each {key, value ->
+      def matcher = key =~ /subCategoryRow(.*)\[\]/
+      if (matcher.matches()) {
+        def rowId = matcher[0][1]
+        rowMap[rowId] = value
+      }
+    }
+
+    def categoryIds = []
+    rowMap.values().each { row ->
+      row.each {
+        categoryIds << it.toLong()
+      }
+    }
+
+    log.debug(categoryIds)
+
+    shoppingService.saveCategorySortOrder(categoryIds)
+
+    render("Category sort order saved!")
   }
 }
