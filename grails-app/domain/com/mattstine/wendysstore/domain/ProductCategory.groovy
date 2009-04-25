@@ -4,24 +4,26 @@ class ProductCategory {
   ProductCategory parentCategory
   SortedSet products
   Set subCategories
+  Long sortIndex
 
-  static hasMany = [products:Product, subCategories:ProductCategory]
+  static hasMany = [products: Product, subCategories: ProductCategory]
 
   static constraints = {
     parentCategory(nullable: true)
+    sortIndex(nullable: true)
   }
 
   static mapping = {
     subCategories sort: "name"
-    parentCategory lazy:false
+    parentCategory lazy: false
   }
 
   static transients = ['breadcrumbs']
 
   def getBreadcrumbs() {
-      def out = ""
-      out = traverseAncestry(this, out)
-      out
+    def out = ""
+    out = traverseAncestry(this, out)
+    out
   }
 
   def traverseAncestry(ProductCategory productCategory, def out) {
@@ -39,6 +41,15 @@ class ProductCategory {
     def all = ProductCategory.findAll()
     all.remove(me)
     return all
+  }
+
+  def beforeInsert = {
+    def maxSortIndex = Product.executeQuery("select max(sortIndex) from ProductCategory")
+    if (maxSortIndex[0]) {
+      sortIndex = maxSortIndex[0] + 1
+    } else {
+      sortIndex = 1
+    }
   }
 
 }
