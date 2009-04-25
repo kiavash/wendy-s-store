@@ -9,6 +9,21 @@
   <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'wendysStore.css')}" type="text/css">
   <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
   <g:javascript library="scriptaculous"/>
+  <g:ifAllGranted role="ROLE_ADMIN">
+    <g:javascript>
+    document.observe('dom:loaded', function() {
+
+      Sortable.create('productCategoryMenu', {onUpdate:function() {
+          <g:remoteFunction controller="productCategory" action="sortMenu" params="Sortable.serialize('productCategoryMenu')"/>
+      }});
+
+      Sortable.create('pageMenu', {only:'sortable', onUpdate:function() {
+          <g:remoteFunction controller="page" action="sortMenu" params="Sortable.serialize('pageMenu')"/>
+      }});
+
+      });
+    </g:javascript>
+  </g:ifAllGranted>
   <g:layoutHead/>
 </head>
 <body>
@@ -26,33 +41,33 @@
   <div id="bottomBorder" class="span-24">&nbsp;</div>    
   <div id="sidebar" class="span-4">
     <img src="${createLinkTo(dir: 'images', file: 'shopOurStore.png')}" alt="Shop Our Store" class="sidebarHeading"/>
-    <ul class="menu">
-      <g:each in="${ProductCategory.findAllByParentCategoryIsNull()}" var="category">
-        <li class="menuItem menuItemMouseOut"><g:link controller="shopping" action="category" id="${category.id}">${category.name}</g:link></li>
+    <ul id="productCategoryMenu" class="menu">
+      <g:each in="${ProductCategory.findAllByParentCategoryIsNull(sort:'sortIndex', order:'asc')}" var="category">
+        <li id="productCategory_${category.id}" class="menuItem"><g:link controller="shopping" action="category" id="${category.id}">${category.name}</g:link></li>
       </g:each>
     </ul>
     <img src="${createLinkTo(dir: 'images', file: 'information.png')}" alt="Information" class="sidebarHeading"/>
-    <ul class="menu">
+    <ul id="pageMenu" class="menu">
+      <g:each in="${Page.findAll(sort:'sortIndex', order:'asc')}" var="page">
+        <li id="page_${page.id}" class="menuItem sortable"><g:link controller="page" action="show" id="${page.id}">${page.sidebarLinkTitle}</g:link></li>
+      </g:each>
       <g:isNotLoggedIn>
-        <li class="menuItem menuItemMouseOut"><g:link controller="login">Login</g:link></li>
+        <li class="menuItem"><g:link controller="login">Login</g:link></li>
       </g:isNotLoggedIn>
       <g:isLoggedIn>
-        <li class="menuItem menuItemMouseOut"><g:link controller="register">My Account</g:link></li>
-        <li class="menuItem menuItemMouseOut"><g:link controller="logout">Logout</g:link></li>
+        <li class="menuItem"><g:link controller="register">My Account</g:link></li>
+        <li class="menuItem"><g:link controller="logout">Logout</g:link></li>
       </g:isLoggedIn>
-      <g:each in="${Page.findAll()}" var="page">
-        <li class="menuItem menuItemMouseOut"><g:link controller="page" action="show" id="${page.id}">${page.sidebarLinkTitle}</g:link></li>
-      </g:each>
     </ul>
     <g:ifAllGranted role="ROLE_ADMIN">
       <img src="${createLinkTo(dir: 'images', file: 'admin.png')}" alt="Administration" class="sidebarHeading"/>
       <ul class="menu">
-        <li class="menuItem menuItemMouseOut"><g:link controller="product">Manage Products</g:link></li>
-        <li class="menuItem menuItemMouseOut"><g:link controller="productCategory">Manage Categories</g:link></li>
-        <li class="menuItem menuItemMouseOut"><g:link controller="customization">Manage Customizations</g:link></li>
-        <li class="menuItem menuItemMouseOut"><g:link controller="page">Manage Pages</g:link></li>        
-        <li class="menuItem menuItemMouseOut"><g:link controller="user">Manage Users</g:link></li>
-        <li class="menuItem menuItemMouseOut"><g:link controller="role">Manage Roles</g:link></li>
+        <li class="menuItem"><g:link controller="product">Manage Products</g:link></li>
+        <li class="menuItem"><g:link controller="productCategory">Manage Categories</g:link></li>
+        <li class="menuItem"><g:link controller="customization">Manage Customizations</g:link></li>
+        <li class="menuItem"><g:link controller="page">Manage Pages</g:link></li>
+        <li class="menuItem"><g:link controller="user">Manage Users</g:link></li>
+        <li class="menuItem"><g:link controller="role">Manage Roles</g:link></li>
       </ul>
     </g:ifAllGranted>
   </div>
