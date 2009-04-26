@@ -21,6 +21,8 @@
           <g:remoteFunction controller="page" action="sortMenu" params="Sortable.serialize('pageMenu')"/>
       }});
 
+      new Ajax.InPlaceEditor('headerMessage','${createLink(controller: 'welcomeMessage', action: 'update')}');  
+
       });
     </g:javascript>
   </g:ifAllGranted>
@@ -32,7 +34,7 @@
   <div id="header" class="span-24">
     <div class="span-15"><img src="${createLinkTo(dir: 'images', file: 'DuckDuckLogo.jpg')}" alt="Duck Duck Goose Designs"/></div>
     <div class="span-9 last">
-      <div id="headerMessage" class="span-9">Grand Opening!</div>
+      <div id="headerMessage" class="span-9">${request.servletContext.getAttribute("welcomeMessage")}</div>
       <div id="homeButtom" class="span-3 buttonCell"><g:link controller="home"><img src="${createLinkTo(dir: 'images', file: 'homeButton.png')}" alt="Home"/></g:link></div>
       <div id="cartButton" class="span-3 buttonCell"><g:link controller="shopping" action="viewCart"><img src="${createLinkTo(dir: 'images', file: 'cartButton.png')}" alt="Cart"/></g:link></div>
       <div id="contactUsButton" class="span-3 last buttonCell"><g:link controller="contactUs"><img src="${createLinkTo(dir: 'images', file: 'contactUsButton.png')}" alt="Contact Us"/></g:link></div>
