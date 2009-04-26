@@ -4,4 +4,6 @@ You did not type the words in the image correctly. Please try again.
   if (!$('ajaxMessage').visible()) {
     $('ajaxMessage').toggle();
   }
+
+  Recaptcha.reload();
 </script>

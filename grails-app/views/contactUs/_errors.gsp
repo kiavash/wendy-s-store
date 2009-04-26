@@ -4,4 +4,6 @@
   if (!$('ajaxMessage').visible()) {
     $('ajaxMessage').toggle();
   }
+
+  Recaptcha.reload();
 </script>
