@@ -12,6 +12,8 @@ class BootStrap {
 
      def init = { servletContext ->
 
+       servletContext.setAttribute("welcomeMessage","Grand Opening!")
+
        switch(grails.util.GrailsUtil.environment) {
 
          case "development":
