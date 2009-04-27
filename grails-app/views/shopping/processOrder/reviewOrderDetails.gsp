@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.mattstine.wendysstore.domain.CouponCodeType" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
   <title>Order Summary</title>
@@ -62,9 +62,7 @@
     </tr>
     </thead>
     <tbody>
-    <sc:each>
-      <g:set value="${com.metasieve.shoppingcart.Shoppable.findByShoppingItem(it['item'])}" var="orderItem"/>
-      <g:set value="${it['qty']}" var="quantity"/>
+    <g:each in="${order.orderItems}" var="orderItem">
       <tr>
         <td>
           <strong>${orderItem.product.name}</strong><br/>${orderItem.price.description} (<g:formatNumber format="\$0.00" number="${orderItem.price.price}"/>)<br/><br/>
@@ -77,21 +75,57 @@
           </ul>
         </td>
         <td style="vertical-align:top">
-          ${quantity}
+          ${orderItem.quantity}
         </td>
         <td style="text-align: right; vertical-align: top; padding-top: 10px">
-          <g:formatNumber format="\$0.00" number="${orderItem.totalPrice * quantity}"/>
+          <g:formatNumber format="\$0.00" number="${orderItem.totalPrice * orderItem.quantity}"/>
         </td>
       </tr>
-    </sc:each>
+    </g:each>
+    <g:if test="${order.couponCode != null}">
+      <tr>
+        <td>&nbsp;</td>
+        <td style="text-align: right"><strong>Subtotal:</strong></td>
+        <td style="text-align: right"><g:formatNumber format="\$0.00" number="${order.subtotal}"/></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td style="text-align: right"><strong>Discount:</strong></td>
+        <td style="text-align: right">-<g:formatNumber format="\$0.00" number="${order.amountOff}"/></td>
+        <td>&nbsp;</td>
+      </tr>
+    </g:if>
     <tr>
       <td>&nbsp;</td>
-      <td style="text-align: right"><strong>Cart Total:</strong></td>
-      <td style="text-align: right"><g:formatNumber format="\$0.00" number="${totalCharge}"/></td>
+      <td style="text-align: right"><strong>Order Total:</strong></td>
+      <td style="text-align: right"><g:formatNumber format="\$0.00" number="${order.totalCharge}"/></td>
       <td>&nbsp;</td>
     </tr>
     </tbody>
   </table>
+  <g:if test="${order.couponCode == null}">
+    <g:form name="applyCouponCodeForm" action="processOrder">
+      <fieldset>
+        <p><label for="couponCode">Apply Coupon Code</label><br/>
+          <g:textField name="couponCode"/></p>
+
+        <p><g:submitButton name="applyCouponCode" value="Apply"/></p>
+      </fieldset>
+    </g:form>
+  </g:if>
+  <g:else>
+    <fieldset>
+      Coupon Code Applied: <strong>${order.couponCode.code}</strong><br/>
+      <g:if test="${order.couponCode.type == CouponCodeType.DOLLARS_OFF}">
+        <g:formatNumber format="\$0.00" number="${order.couponCode.amount}"/> off your order.
+      </g:if>
+      <g:else>
+        <g:formatNumber format="0%" number="${order.couponCode.amount / 100}"/> off your order.
+      </g:else>
+    </fieldset>
+  </g:else>
+
   <g:form name="prepareOrderForm" controller="shopping" action="checkout">
     <fieldset>
 
@@ -106,7 +140,7 @@
           <g:each in="${person.shippingAddresses}" var="shippingAddress">
             <option value="${shippingAddress.id}" <g:if test="${shippingAddress.defaultAddress}">selected</g:if>>${shippingAddress.name}</option>
           </g:each>
-        </select> (<g:link controller="register" action="addShippingAddress" params="${[userId:person.id]}">Add Shipping Address</g:link>)</p>
+        </select> (<g:link action="processOrder" event="addShippingAddress" params="${[userId:person.id]}">Add Shipping Address</g:link>)</p>
 
       <div id="shippingAddressView" style="display:none"></div>
 
