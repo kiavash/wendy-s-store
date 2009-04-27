@@ -63,20 +63,11 @@ class ShoppingController {
     modelMap.numberOfItems = shoppingCartService.getItems()?.size()
 
     if (modelMap.numberOfItems > 0) {
-      def totalCharge = calculateTotalChargeForCart()
+      def totalCharge = shoppingService.calculateTotalChargeForCart()
       modelMap.totalCharge = totalCharge
     }
 
     render(view: "cart", model: modelMap)
-  }
-
-  def calculateTotalChargeForCart() {
-    def totalCharge = 0.00
-
-    shoppingCartService.getItems().each() {item ->
-      totalCharge += com.metasieve.shoppingcart.Shoppable.findByShoppingItem(item).totalPrice * shoppingCartService.getQuantity(item)
-    }
-    return totalCharge
   }
 
   def updateQuantity = {
@@ -98,10 +89,65 @@ class ShoppingController {
   }
 
   @Secured (['ROLE_USER'])
-  def prepareOrder = {
-    def user = authenticateService.userDomain()
-    user = User.get(user.id)
-    [totalCharge: calculateTotalChargeForCart(), person: user]
+  def processOrderFlow = {
+    init {
+      action {
+        def user = authenticateService.userDomain()
+        user = User.get(user.id)
+
+        def order = new Order()
+        shoppingCartService.getItems().each {scItem ->
+          def orderItem = com.metasieve.shoppingcart.Shoppable.findByShoppingItem(scItem)
+          orderItem.quantity = shoppingCartService.getQuantity(scItem)
+          order.addToOrderItems(orderItem)
+        }
+        [order: order, person: user]
+      }
+      on("success").to "reviewOrderDetails"
+    }
+
+    reviewOrderDetails {
+      on("applyCouponCode") {
+        def couponCode = CouponCode.findByCode(params.couponCode)
+        if (couponCode) {
+          flow.order.couponCode = couponCode
+        } else {
+          flash.message = "Unrecognized coupon code."
+        }
+      }.to "reviewOrderDetails"
+
+      on("addShippingAddress") {
+        [address: new Address(), userId: params.userId]
+      }.to "addShippingAddress"
+    }
+
+    addShippingAddress {
+      on("save").to("saveShippingAddress")
+    }
+
+    saveShippingAddress {
+      action {
+        def user = User.get(params.userId)
+        def address = new Address(params)
+
+        if (!address.hasErrors() && address.validate()) {
+          if (address.defaultAddress) {
+            addressService.saveAddressAsNewDefault(user, address)
+          } else {
+            user.addToShippingAddresses(address)
+            user.save()
+          }
+
+          flash.message = "Address \"${address.name}\" added."
+          "success"
+        } else {
+          "fail"
+        }
+      }
+      on("success").to "reviewOrderDetails"
+      on("fail").to "addShippingAddress"
+    }
+
   }
 
   def checkout = {
@@ -141,9 +187,9 @@ class ShoppingController {
     }
 
     def productIds = []
-    rowMap.values().each { row ->
+    rowMap.values().each {row ->
       row.each {
-        productIds << it.toLong() 
+        productIds << it.toLong()
       }
     }
 
@@ -165,7 +211,7 @@ class ShoppingController {
     }
 
     def categoryIds = []
-    rowMap.values().each { row ->
+    rowMap.values().each {row ->
       row.each {
         categoryIds << it.toLong()
       }
