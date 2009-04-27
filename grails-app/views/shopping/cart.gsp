@@ -64,7 +64,7 @@
       </tr>
       </tbody>
     </table>
-    <g:form controller="shopping" action="prepareOrder">
+    <g:form controller="shopping" action="processOrder">
       <p><g:submitButton value="Checkout" name="checkoutButton"/></p>
     </g:form>
   </g:else>
