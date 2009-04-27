@@ -2,7 +2,7 @@ package com.mattstine.wendysstore.domain
 
 import java.text.DecimalFormat
 
-class CustomizationChoice {
+class CustomizationChoice implements Serializable {
 
   String label
   Boolean chargeable = false

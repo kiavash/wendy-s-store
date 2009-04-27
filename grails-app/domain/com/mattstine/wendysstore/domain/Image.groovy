@@ -1,5 +1,5 @@
 package com.mattstine.wendysstore.domain
-class Image {
+class Image implements Serializable {
       String path
       String name
       static belongsTo = [product:Product,category:ProductCategory]

@@ -1,6 +1,6 @@
 package com.mattstine.wendysstore.domain
 
-class CustomizationItem {
+class CustomizationItem implements Serializable {
 
   Customization customization
 

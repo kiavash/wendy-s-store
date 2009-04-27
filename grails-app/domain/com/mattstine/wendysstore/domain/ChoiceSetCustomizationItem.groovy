@@ -1,6 +1,6 @@
 package com.mattstine.wendysstore.domain
 
-class ChoiceSetCustomizationItem extends CustomizationItem {
+class ChoiceSetCustomizationItem extends CustomizationItem implements Serializable {
 
     CustomizationChoice customizationChoice
 

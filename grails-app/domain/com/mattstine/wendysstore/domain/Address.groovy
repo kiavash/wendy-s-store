@@ -1,6 +1,6 @@
 package com.mattstine.wendysstore.domain
 
-class Address {
+class Address implements Serializable {
   String name
   String addressLineOne
   String addressLineTwo

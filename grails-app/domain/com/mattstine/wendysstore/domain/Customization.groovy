@@ -1,6 +1,6 @@
 package com.mattstine.wendysstore.domain
 
-class Customization {
+class Customization implements Serializable {
   String label
   CustomizationType type
   Boolean chargeable = false

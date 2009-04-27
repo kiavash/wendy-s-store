@@ -1,6 +1,6 @@
 package com.mattstine.wendysstore.domain
 
-class BooleanCustomizationItem extends CustomizationItem {
+class BooleanCustomizationItem extends CustomizationItem implements Serializable {
 
     String value
 
