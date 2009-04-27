@@ -64,13 +64,14 @@
     <g:ifAllGranted role="ROLE_ADMIN">
       <img src="${createLinkTo(dir: 'images', file: 'admin.png')}" alt="Administration" class="sidebarHeading"/>
       <ul class="menu">
-        <li class="menuItem"><g:link controller="product">Manage Products</g:link></li>
-        <li class="menuItem"><g:link controller="productCategory">Manage Categories</g:link></li>
-        <li class="menuItem"><g:link controller="customization">Manage Customizations</g:link></li>
-        <li class="menuItem"><g:link controller="page">Manage Pages</g:link></li>
-        <li class="menuItem"><g:link controller="user">Manage Users</g:link></li>
-        <li class="menuItem"><g:link controller="role">Manage Roles</g:link></li>
-        <li class="menuItem"><g:link controller="contactUs" action="showMessages">View Contact Us Messages</g:link></li>        
+        <li class="menuItem"><g:link controller="product">Products</g:link></li>
+        <li class="menuItem"><g:link controller="productCategory">Categories</g:link></li>
+        <li class="menuItem"><g:link controller="customization">Customizations</g:link></li>
+        <li class="menuItem"><g:link controller="couponCode">Coupon Codes</g:link></li>
+        <li class="menuItem"><g:link controller="page">Pages</g:link></li>
+        <li class="menuItem"><g:link controller="user">Users</g:link></li>
+        <li class="menuItem"><g:link controller="role">Roles</g:link></li>
+        <li class="menuItem"><g:link controller="contactUs" action="showMessages">View Messages</g:link></li>        
       </ul>
     </g:ifAllGranted>
   </div>
