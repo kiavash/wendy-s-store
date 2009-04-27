@@ -3,7 +3,18 @@ import com.mattstine.wendysstore.domain.ProductCategory
 
 class ShoppingService {
 
+  def shoppingCartService
+
   boolean transactional = true
+
+  def calculateTotalChargeForCart() {
+    def totalCharge = 0.00
+
+    shoppingCartService.getItems().each() {item ->
+      totalCharge += com.metasieve.shoppingcart.Shoppable.findByShoppingItem(item).totalPrice * shoppingCartService.getQuantity(item)
+    }
+    return totalCharge
+  }
 
   def saveProductSortOrder(def productIds) {
     def productsToSort = Product.findAllByIdInList(productIds)
