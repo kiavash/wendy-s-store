@@ -2,7 +2,7 @@ package com.mattstine.wendysstore.domain
 
 import java.text.DecimalFormat
 
-class Price {
+class Price implements Serializable {
 
     String description
     BigDecimal price

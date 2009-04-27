@@ -1,5 +1,5 @@
 package com.mattstine.wendysstore.domain
-class Payment {
+class Payment implements Serializable {
   BigDecimal amount
   Date paymentDate
 }

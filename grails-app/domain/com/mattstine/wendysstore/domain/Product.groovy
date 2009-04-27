@@ -1,5 +1,5 @@
 package com.mattstine.wendysstore.domain
-class Product implements Comparable {
+class Product implements Comparable, Serializable {
   String name
   String description
   List prices

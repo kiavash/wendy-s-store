@@ -5,7 +5,7 @@ import com.mattstine.wendysstore.domain.Role
 /**
  * User domain class.
  */
-class User {
+class User implements Serializable {
 	static transients = ['pass']
 	static hasMany = [authorities: Role, shippingAddresses:Address]
 	static belongsTo = Role

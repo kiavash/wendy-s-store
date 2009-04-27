@@ -1,5 +1,5 @@
 package com.mattstine.wendysstore.domain
-class ProductCategory implements Comparable {
+class ProductCategory implements Comparable, Serializable {
   String name
   ProductCategory parentCategory
   SortedSet products

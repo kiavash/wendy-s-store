@@ -5,7 +5,7 @@ import com.mattstine.wendysstore.domain.User
 /**
  * Authority domain class.
  */
-class Role {
+class Role implements Serializable {
 
 	static hasMany = [people: User]
 
