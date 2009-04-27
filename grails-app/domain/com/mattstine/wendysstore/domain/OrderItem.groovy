@@ -5,10 +5,15 @@ import com.mattstine.wendysstore.domain.CustomizationType
 import com.mattstine.wendysstore.domain.Price
 import com.mattstine.wendysstore.domain.Product
 
-class OrderItem extends com.metasieve.shoppingcart.Shoppable {
+class OrderItem extends com.metasieve.shoppingcart.Shoppable implements Serializable {
 
   Product product
   Price price
+  Integer quantity
+
+  static constraints = {
+    quantity(nullable:true)
+  }
 
   static hasMany = [customizationItems: CustomizationItem]
 
