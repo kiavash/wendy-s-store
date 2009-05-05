@@ -14,7 +14,7 @@ class BootStrap {
 
        servletContext.setAttribute("welcomeMessage","Grand Opening!")
 
-       switch(grails.util.GrailsUtil.environment) {
+       /*switch(grails.util.GrailsUtil.environment) {
 
          case "development":
            //inits for development
@@ -97,7 +97,7 @@ class BootStrap {
            //inits for production
          break
 
-       }
+       } */
 
      }
      def destroy = {
