@@ -1,4 +1,4 @@
-<%@ page import="com.mattstine.wendysstore.domain.CouponCodeType" contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.mattstine.wendysstore.controllers.CheckoutCommand; com.mattstine.wendysstore.domain.CouponCodeType" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
   <title>Order Summary</title>
@@ -31,7 +31,7 @@
         element.observe('change', function() {
 
           var deliveryMethod = $RF('prepareOrderForm', 'deliveryMethod');
-          if (deliveryMethod == 1) {
+          if (deliveryMethod == '${CheckoutCommand.LOCAL_PICKUP}') {
             $('shippingAddress').disable();
             $('shippingAddressView').blindUp();
           } else {
@@ -92,7 +92,7 @@
       <tr>
         <td>&nbsp;</td>
         <td style="text-align: right"><strong>Discount:</strong></td>
-        <td style="text-align: right">-<g:formatNumber format="\$0.00" number="${order.amountOff}"/></td>
+        <td style="text-align: right">-<g:formatNumber format="\$0.00" number="${order.getAmountOff(order.subtotal)}"/></td>
         <td>&nbsp;</td>
       </tr>
     </g:if>
@@ -126,11 +126,11 @@
     </fieldset>
   </g:else>
 
-  <g:form name="prepareOrderForm" controller="shopping" action="checkout">
+  <g:form name="prepareOrderForm" controller="shopping" action="processOrder">
     <fieldset>
 
       <p><label for="deliveryMethod">Delivery Method</label><br/>
-        <g:radioGroup name="deliveryMethod" labels="['Local Pickup','Ship']" values="[1,2]" value="1">
+        <g:radioGroup name="deliveryMethod" labels="[CheckoutCommand.LOCAL_PICKUP,CheckoutCommand.SHIP]" values="[CheckoutCommand.LOCAL_PICKUP,CheckoutCommand.SHIP]" value="${CheckoutCommand.LOCAL_PICKUP}">
           ${it.radio} ${it.label}<br/>
         </g:radioGroup></p>
 
@@ -144,7 +144,8 @@
 
       <div id="shippingAddressView" style="display:none"></div>
 
-      <p><g:submitButton value="Checkout" name="checkoutButton"/></p>
+      <p><g:submitButton value="Checkout" name="checkout"/><br/><!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr>
+<tr><td align="center"><a href="#" onclick="javascript:window.open('https://www.sandbox.paypal.com/us/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');"><img  src="https://www.sandbox.paypal.com/en_US/i/bnr/horizontal_solution_PPeCheck.gif" border="0" alt="Solution Graphics"></a></td></tr></table><!-- PayPal Logo --></p>
     </fieldset>
   </g:form>
 </div>
