@@ -39,10 +39,10 @@
         <td valign="top" class="value">${person.email?.encodeAsHTML()}</td>
       </tr>
 
-      <!--<tr class="prop">-->
-      <!--<td valign="top" class="name">Show Email:</td>-->
-      %{--<td valign="top" class="value">${person.emailShow}</td>--}%
-      <!--</tr>-->
+      <tr class="prop">
+      <td valign="top" class="name">Phone:</td>
+      <td valign="top" class="value">(${person.areaCode}) ${person.phonePrefix}-${person.phoneSuffix}</td>
+      </tr>
 
       %{--<tr class="prop">--}%
       %{--<td valign="top" class="name">Roles:</td>--}%

@@ -43,6 +43,9 @@
       <input type="text" name='email' value="${person?.email?.encodeAsHTML()}" class="text"/>
     </p>
 
+    <p><label>Phone</label><br/>
+      (<g:textField name="areaCode" size="3" value="${person.areaCode}"/>) <g:textField name="phonePrefix" size="3" value="${person.phonePrefix}"/>-<g:textField name="phoneSuffix" size="4" value="${person.phoneSuffix}"/></p>  
+
     <p>
       <recaptcha:ifEnabled>
         <recaptcha:recaptcha theme="white"/>

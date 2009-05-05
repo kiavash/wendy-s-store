@@ -65,12 +65,12 @@
           </td>
         </tr>
 
-        <!--<tr class='prop'>-->
-          <!--<td valign='top' class='name'><label for='emailShow'>Show Email:</label></td>-->
-          %{--<td valign='top' class='value ${hasErrors(bean: person, field: 'emailShow', 'errors')}'>--}%
-            %{--<g:checkBox name='emailShow' value="${person.emailShow}"></g:checkBox>--}%
-          <!--</td>-->
-        <!--</tr>-->
+        <tr class='prop'>
+          <td valign='top' class='name'><label>Phone:</label></td>
+          <td valign='top' class='value'>
+            (<g:textField name="areaCode" size="3" value="${person.areaCode}"/>) <g:textField name="phonePrefix" size="3" value="${person.phonePrefix}"/>-<g:textField name="phoneSuffix" size="4" value="${person.phoneSuffix}"/>
+          </td>
+        </tr>
 
         </tbody>
       </table>

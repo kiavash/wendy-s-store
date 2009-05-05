@@ -25,6 +25,7 @@
                     <g:sortableColumn property="firstName" title="Last Name" />
 					<g:sortableColumn property="enabled" title="Enabled" />
 					<g:sortableColumn property="description" title="Description" />
+                    <th>Phone</th>
 					<th>&nbsp;</th>
 				</tr>
 			</thead>
@@ -37,6 +38,7 @@
                     <td>${person.lastName?.encodeAsHTML()}</td>                  
 					<td>${person.enabled?.encodeAsHTML()}</td>
 					<td>${person.description?.encodeAsHTML()}</td>
+                    <td>(${person.areaCode}) ${person.phonePrefix}-${person.phoneSuffix}</td>
 					<td class="actionButtons">
 						<span class="actionButton">
 							<g:link action="show" id="${person.id}">Show</g:link>
