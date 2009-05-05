@@ -12,7 +12,7 @@ environments {
       driverClassName = "com.mysql.jdbc.Driver"
       username = "root"
       password = ""
-      dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+      dbCreate = "update" // one of 'create', 'create-drop','update'
       url = "jdbc:mysql://localhost/wendysStoreDev"
     }
   }
