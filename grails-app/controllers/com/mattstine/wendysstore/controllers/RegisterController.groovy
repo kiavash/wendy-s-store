@@ -113,6 +113,9 @@ class RegisterController {
     person.firstName = params.firstName
     person.lastName = params.lastName
     person.email = params.email
+    person.areaCode = params.areaCode
+    person.phonePrefix = params.phonePrefix
+    person.phoneSuffix = params.phoneSuffix
 //    if (params.emailShow) {
 //      person.emailShow = true
 //    }
