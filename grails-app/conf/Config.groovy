@@ -11,8 +11,8 @@
 // }
 
 
-store.productImages.location = "/Users/mstine/Projects/wendysStore/web-app/images/productImages"
-store.productImages.webPath = "images/productImages"
+store.productImages.location = "/home/webadmin/duckduckgoosedesigns.com/html/media/productImages"
+store.productImages.webPath = "media/productImages"
 
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
