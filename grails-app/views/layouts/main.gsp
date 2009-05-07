@@ -64,6 +64,7 @@
     <g:ifAllGranted role="ROLE_ADMIN">
       <img src="${createLinkTo(dir: 'images', file: 'admin.png')}" alt="Administration" class="sidebarHeading"/>
       <ul class="menu">
+        <li class="menuItem"><g:link controller="orders">Orders</g:link></li>
         <li class="menuItem"><g:link controller="product">Products</g:link></li>
         <li class="menuItem"><g:link controller="productCategory">Categories</g:link></li>
         <li class="menuItem"><g:link controller="customization">Customizations</g:link></li>
