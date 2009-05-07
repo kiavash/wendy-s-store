@@ -57,7 +57,7 @@ log4j = {
     file name: 'file', file: '/var/log/tomcat6/duckduckgoosedesigns.log'
   }
   root {
-    error 'stdout', 'file'
+    debug 'stdout', 'file'
     additivity = true
   }
 
@@ -77,6 +77,8 @@ log4j = {
           'org.hibernate'
 
   warn 'org.mortbay.log'
+
+  error stdout:"StackTrace"
 }
 
 //log4j.logger.org.springframework.security='off,stdout'
