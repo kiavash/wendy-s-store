@@ -53,6 +53,12 @@ environments {
 
 // log4j configuration
 log4j = {
+  root {
+    error 'stdout'
+    additivity = true
+  }
+
+
   debug 'grails.app.controller'
 
 
