@@ -53,8 +53,11 @@ environments {
 
 // log4j configuration
 log4j = {
+  appenders {
+    file name: 'file', file: '/var/log/tomcat6/duckduckgoosedesigns.log'
+  }
   root {
-    error 'stdout'
+    error 'stdout', 'file'
     additivity = true
   }
 
