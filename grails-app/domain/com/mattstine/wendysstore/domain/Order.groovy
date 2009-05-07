@@ -11,6 +11,7 @@ class Order implements Serializable {
   Address shippingAddress
   Payment payment
   CouponCode couponCode
+  Date dateCreated
 
   static constraints = {
     deliveryMethod(blank: false)
