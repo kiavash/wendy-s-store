@@ -1,6 +1,7 @@
 package com.mattstine.wendysstore.domain
 class ProductCategory implements Comparable, Serializable {
   String name
+  String description
   ProductCategory parentCategory
   SortedSet products
   SortedSet subCategories
@@ -10,6 +11,7 @@ class ProductCategory implements Comparable, Serializable {
   static hasMany = [products: Product, subCategories: ProductCategory]
 
   static constraints = {
+    description(nullable: true, blank: true, maxSize:1000)
     parentCategory(nullable: true)
     sortIndex(nullable: true)
     image(nullable:true)

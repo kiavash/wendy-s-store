@@ -48,6 +48,13 @@
       </tr>
 
       <tr class="prop">
+        <td valign="top" class="name">Description:</td>
+
+        <td valign="top" class="value">${fieldValue(bean: productCategoryInstance, field: 'description')}</td>
+
+      </tr>
+
+      <tr class="prop">
         <td valign="top" class="name">Parent Category:</td>
 
         <td valign="top" class="value">${fieldValue(bean: productCategoryInstance, field: 'parentCategory.name')}</td>
