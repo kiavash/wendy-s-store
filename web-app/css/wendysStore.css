@@ -27,6 +27,9 @@ thead th {
     color: #fff;
 }
 
+textarea {width:260px;height:125px;padding:5px;}
+
+
 .cartItemColumn {
     width: 50%;
 }
