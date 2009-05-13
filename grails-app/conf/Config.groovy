@@ -22,6 +22,8 @@ uiperformance.enabled = true
 
  */
 
+uiperformance.continueAfterMinifyCssError = true
+
 uiperformance.bundles = [
    [type: 'js',
     name: 'prototype/prototype.all',
