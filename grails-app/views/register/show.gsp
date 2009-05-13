@@ -5,8 +5,10 @@
 
 <body>
 
-<div class="body">
-  <h1>Your profile:</h1>
+<div class="prepend-1 span-18 append-1">
+  <h1>My Account</h1>
+
+  <h2>Customer Profile:</h2>
   <g:if test="${flash.message}">
     <div class="message">${flash.message}</div>
   </g:if>
@@ -15,17 +17,17 @@
       <tbody>
 
       <tr class="prop">
-        <td valign="top" class="name">Login Name:</td>
+        <td valign="top" class="name"><strong>Login Name:</strong></td>
         <td valign="top" class="value">${person.username?.encodeAsHTML()}</td>
       </tr>
 
-      <tr class="prop">
-        <td valign="top" class="name">First Name:</td>
+      <tr class="prop even">
+        <td valign="top" class="name"><strong>First Name:</strong></td>
         <td valign="top" class="value">${person.firstName?.encodeAsHTML()}</td>
       </tr>
 
       <tr class="prop">
-        <td valign="top" class="name">Last Name:</td>
+        <td valign="top" class="name"><strong>Last Name:</strong></td>
         <td valign="top" class="value">${person.lastName?.encodeAsHTML()}</td>
       </tr>
 
@@ -34,13 +36,13 @@
       %{--<td valign="top" class="value">${person.enabled}</td>--}%
       <!--</tr>-->
 
-      <tr class="prop">
-        <td valign="top" class="name">Email:</td>
+      <tr class="prop even">
+        <td valign="top" class="name"><strong>Email:</strong></td>
         <td valign="top" class="value">${person.email?.encodeAsHTML()}</td>
       </tr>
 
       <tr class="prop">
-      <td valign="top" class="name">Phone:</td>
+      <td valign="top" class="name"><strong>Phone:</strong></td>
       <td valign="top" class="value">(${person.areaCode}) ${person.phonePrefix}-${person.phoneSuffix}</td>
       </tr>
 
@@ -62,12 +64,18 @@
   <div class="buttons">
     <g:form>
       <input type="hidden" name="id" value="${person.id}"/>
-      <span class="button"><g:actionSubmit class='edit' value="Edit"/></span>
+      <span class="button"><g:actionSubmit class='edit' value="Edit Your Profile"/></span>
     </g:form>
   </div>
 
+  <br/><hr/>
+
   <div id="shippingAddresses">
-    <h2>Shipping Addresses:</h2>
+
+    <h2>Saved Shipping Addresses:</h2>
+
+    <p>(<g:link controller="register" action="addShippingAddress" params="${[userId:person.id]}">Add a New Shipping Address</g:link>)</p>
+    
 
     <g:if test="${person.shippingAddresses.size() == 0}">
       None
@@ -75,12 +83,12 @@
     <g:else>
       <ul>
       <g:each in="${person.shippingAddresses}" var="address">
-        <li>${address.name} <g:if test="${address.defaultAddress}">(default)</g:if> [<g:link action="editShippingAddress" id="${address.id}">Edit</g:link>] [<g:link action="deleteShippingAddress" id="${address.id}">Delete</g:link>]</li>
+        <li><strong>${address.name}</strong> <g:if test="${address.defaultAddress}"><em>(default)</em></g:if><br/>
+        [<g:link action="editShippingAddress" id="${address.id}">Edit this Address</g:link>] [<g:link action="deleteShippingAddress" id="${address.id}">Delete this Address</g:link>]</li>
       </g:each>
     </g:else>
     </ul>
 
-    <p>(<g:link controller="register" action="addShippingAddress" params="${[userId:person.id]}">Add Shipping Address</g:link>)</p>
   </div>
 
 </div>
