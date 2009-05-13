@@ -10,17 +10,7 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-uiperformance.enabled = true
-
-/*
-<script type="text/javascript" src="/wendysStore/js/prototype/scriptaculous.js"></script>
-<script type="text/javascript" src="/wendysStore/js/prototype/builder.js"></script>
-<script type="text/javascript" src="/wendysStore/js/prototype/controls.js"></script>
-<script type="text/javascript" src="/wendysStore/js/prototype/effects.js"></script>
-<script type="text/javascript" src="/wendysStore/js/prototype/slider.js"></script>
-<script type="text/javascript" src="/wendysStore/js/prototype/dragdrop.js"></script>
-
- */
+uiperformance.enabled = false
 
 uiperformance.continueAfterMinifyCssError = true
 
