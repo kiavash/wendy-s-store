@@ -7,8 +7,8 @@
   <!--[if IE]><p:css name='blueprint/ie'/><![endif]-->
   <p:css name='wendysStore'/>
   <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
-  <p:javascript src='prototype.all'/>
-  %{--<g:javascript library="scriptaculous"/>--}%
+  %{--<p:javascript src='prototype.all'/>--}%
+  <g:javascript library="scriptaculous"/>
   <g:ifAllGranted role="ROLE_ADMIN">
     <g:javascript>
     document.observe('dom:loaded', function() {
@@ -32,23 +32,23 @@
 <div id="container" class="container">
   <div id="topBorder" class="span-24">&nbsp;</div>  
   <div id="header" class="span-24">
-    <div class="span-15"><img src="${createLinkTo(dir: 'images', file: 'DuckDuckLogo.jpg')}" alt="Duck Duck Goose Designs"/></div>
+    <div class="span-15"><p:img src="DuckDuckLogo.jpg"/></div>
     <div class="span-9 last">
       <div id="headerMessage" class="span-9">${application.getAttribute("welcomeMessage")}</div>
-      <div id="homeButtom" class="span-3 buttonCell"><g:link controller="home"><img src="${createLinkTo(dir: 'images', file: 'homeButton.png')}" alt="Home"/></g:link></div>
-      <div id="cartButton" class="span-3 buttonCell"><g:link controller="shopping" action="viewCart"><img src="${createLinkTo(dir: 'images', file: 'cartButton.png')}" alt="Cart"/></g:link></div>
-      <div id="contactUsButton" class="span-3 last buttonCell"><g:link controller="contactUs"><img src="${createLinkTo(dir: 'images', file: 'contactUsButton.png')}" alt="Contact Us"/></g:link></div>
+      <div id="homeButtom" class="span-3 buttonCell"><g:link controller="home"><p:img src="homeButton.png"/></g:link></div>
+      <div id="cartButton" class="span-3 buttonCell"><g:link controller="shopping" action="viewCart"><p:img src="cartButton.png"/></g:link></div>
+      <div id="contactUsButton" class="span-3 last buttonCell"><g:link controller="contactUs"><p:img src="contactUsButton.png"/></g:link></div>
     </div>
   </div>
   <div id="bottomBorder" class="span-24">&nbsp;</div>    
   <div id="sidebar" class="span-4">
-    <img src="${createLinkTo(dir: 'images', file: 'shopOurStore.png')}" alt="Shop Our Store" class="sidebarHeading"/>
+    <p:img src="shopOurStore.png"/>
     <ul id="productCategoryMenu" class="menu">
       <g:each in="${ProductCategory.findAllByParentCategoryIsNull(sort:'sortIndex', order:'asc')}" var="category">
         <li id="productCategory_${category.id}" class="menuItem"><g:link controller="shopping" action="category" id="${category.id}">${category.name}</g:link></li>
       </g:each>
     </ul>
-    <img src="${createLinkTo(dir: 'images', file: 'information.png')}" alt="Information" class="sidebarHeading"/>
+    <p:img src="information.png"/>
     <ul id="pageMenu" class="menu">
       <g:each in="${Page.findAll(sort:'sortIndex', order:'asc')}" var="page">
         <li id="page_${page.id}" class="menuItem sortable"><g:link controller="page" action="show" id="${page.id}">${page.sidebarLinkTitle}</g:link></li>
@@ -62,7 +62,7 @@
       </g:isLoggedIn>
     </ul>
     <g:ifAllGranted role="ROLE_ADMIN">
-      <img src="${createLinkTo(dir: 'images', file: 'admin.png')}" alt="Administration" class="sidebarHeading"/>
+      <p:img src="admin.png"/>
       <ul class="menu">
         <li class="menuItem"><g:link controller="orders">Orders</g:link></li>
         <li class="menuItem"><g:link controller="product">Products</g:link></li>

@@ -10,7 +10,7 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-uiperformance.enabled = false
+uiperformance.enabled = true
 
 uiperformance.continueAfterMinifyCssError = true
 
