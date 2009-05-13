@@ -27,7 +27,7 @@ uiperformance.bundles = [
     name: 'prototype/prototype.all',
     files: ['prototype/prototype',
             'prototype/scriptaculous',
-            'prototype/bulder',
+            'prototype/builder',
             'prototype/controls',
             'prototype/effects',
             'prototype/slider',
