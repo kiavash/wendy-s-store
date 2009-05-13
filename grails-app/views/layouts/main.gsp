@@ -3,12 +3,12 @@
 <html>
 <head>
   <title>Duck Duck Goose Designs - <g:layoutTitle/></title>
-  <link rel="stylesheet" href="${createLinkTo(dir: 'css/blueprint', file: 'screen.css')}" type="text/css" media="screen, projection">
-  <link rel="stylesheet" href="${createLinkTo(dir: 'css/blueprint', file: 'print.css')}" type="text/css" media="print">
-  <!--[if IE]><link rel="stylesheet" href="${createLinkTo(dir: 'css/blueprint', file: 'ie.css')}" type="text/css" media="screen, projection"><![endif]-->
-  <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'wendysStore.css')}" type="text/css">
+  <p:css name='blueprint/screen'/>
+  <!--[if IE]><p:css name='blueprint/ie'/><![endif]-->
+  <p:css name='wendysStore'/>
   <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
-  <g:javascript library="scriptaculous"/>
+  <p:javascript src='prototype.all'/>
+  %{--<g:javascript library="scriptaculous"/>--}%
   <g:ifAllGranted role="ROLE_ADMIN">
     <g:javascript>
     document.observe('dom:loaded', function() {

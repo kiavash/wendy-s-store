@@ -10,8 +10,29 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+uiperformance.enabled = true
 
+/*
+<script type="text/javascript" src="/wendysStore/js/prototype/scriptaculous.js"></script>
+<script type="text/javascript" src="/wendysStore/js/prototype/builder.js"></script>
+<script type="text/javascript" src="/wendysStore/js/prototype/controls.js"></script>
+<script type="text/javascript" src="/wendysStore/js/prototype/effects.js"></script>
+<script type="text/javascript" src="/wendysStore/js/prototype/slider.js"></script>
+<script type="text/javascript" src="/wendysStore/js/prototype/dragdrop.js"></script>
 
+ */
+
+uiperformance.bundles = [
+   [type: 'js',
+    name: 'prototype/prototype.all',
+    files: ['prototype/prototype',
+            'prototype/scriptaculous',
+            'prototype/bulder',
+            'prototype/controls',
+            'prototype/effects',
+            'prototype/slider',
+            'prototype/dragdrop']]
+]
 
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
