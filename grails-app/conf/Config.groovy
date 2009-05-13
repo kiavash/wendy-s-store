@@ -13,6 +13,7 @@
 uiperformance.enabled = true
 
 uiperformance.continueAfterMinifyCssError = true
+uiperformance.processJS = false
 
 uiperformance.bundles = [
    [type: 'js',
