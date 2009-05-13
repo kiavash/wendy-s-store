@@ -47,7 +47,7 @@
 </div>
 <div id="productImage" class="span-20 last" style="text-align: center"><a href="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.fullSizeImage?.name)}" rel="lightbox"><img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.mediumImage?.name)}" width="500" class="productImage"><br/>Click to Enlarge</a></div>
 <div id="productContainer" class="span-20 last">
-  <div id="productDescription" class="prepend-4 span-12 append-4 last"><p>${fieldValue(bean: productInstance, field: 'description')}</p></div>
+  <div id="productDescription" class="prepend-4 span-12 append-4 last"><p>${productInstance.description.encodeAsTextile()}</p></div>
 
   <div id="productOptions" class="prepend-4 span-12 append-4 last">
     <g:form name="addToCartForm">

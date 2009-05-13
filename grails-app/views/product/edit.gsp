@@ -42,7 +42,7 @@
             <label for="description">Description:</label>
           </td>
           <td valign="top" class="value ${hasErrors(bean: productInstance, field: 'description', 'errors')}">
-            <g:textArea name="description" id="description" value="${fieldValue(bean:productInstance,field:'description')}" rows="20" cols="40"/>
+            <g:textArea name="description" id="description" value="${productInstance.description}" rows="20" cols="40"/>
           </td>
         </tr>
 
