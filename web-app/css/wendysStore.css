@@ -66,7 +66,7 @@ thead th {
 
 #headerMessage {
     height: 100px;
-    font-size: 2.5em;
+    font-size: 2.0em;
     line-height: 1.25em;
 }
 
@@ -86,6 +86,10 @@ thead th {
 
 #footer {
     text-align: center;
+}
+
+#productDescription {
+    font-size: 1.15em;
 }
 
 #productContainer {
