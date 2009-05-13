@@ -11,8 +11,7 @@
 // }
 
 
-store.productImages.location = "/home/webadmin/duckduckgoosedesigns.com/html/media/productImages"
-store.productImages.webPath = "media/productImages"
+
 
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -42,25 +41,21 @@ environments {
   production {
     grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
     grails.paypal.email = "seller_1237686842_biz@mattstine.com"
-    grails.serverURL = "http://localhost:8080"
+    grails.serverURL = "http://www.duckduckgoosedesigns.com"
+    store.productImages.location = "/home/webadmin/duckduckgoosedesigns.com/html/media/productImages"
+    store.productImages.webPath = "media/productImages"
   }
   development {
     grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
     grails.paypal.email = "seller_1237686842_biz@mattstine.com"
     grails.serverURL = "http://localhost:8080"
+    store.productImages.location = "/Users/mstine/Projects/wendysStore/web-app/images/productImages"
+    store.productImages.webPath = "images/productImages"
   }
 }
 
 // log4j configuration
 log4j = {
-  appenders {
-    file name: 'file', file: '/var/log/tomcat6/duckduckgoosedesigns.log'
-  }
-  root {
-    debug 'stdout', 'file'
-    additivity = true
-  }
-
 
   debug 'grails.app.controller'
 
