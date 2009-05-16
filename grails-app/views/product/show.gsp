@@ -4,7 +4,7 @@
   <meta name="layout" content="main"/>
   <title>${fieldValue(bean: productInstance, field: 'name')}</title>
   <script type="text/javascript" src="${createLinkTo(dir: 'js/dojo', file: 'dojo.js')}"
-          djConfig="parseOnLoad:true, isDebug:true"></script>
+          djConfig="parseOnLoad:true"></script>
   <g:javascript>
     dojo.require("dojo.io.iframe");
 
