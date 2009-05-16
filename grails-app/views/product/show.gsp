@@ -3,6 +3,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="main"/>
   <title>${fieldValue(bean: productInstance, field: 'name')}</title>
+  <g:javascript src="lightbox"/>
   <script type="text/javascript" src="${createLinkTo(dir: 'js/dojo', file: 'dojo.js')}"
           djConfig="parseOnLoad:true"></script>
   <g:javascript>
