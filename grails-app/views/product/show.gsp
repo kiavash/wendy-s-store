@@ -3,7 +3,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="main"/>
   <title>${fieldValue(bean: productInstance, field: 'name')}</title>
-  <g:javascript src="lightbox"/>
   <script type="text/javascript" src="${createLinkTo(dir: 'js/dojo', file: 'dojo.js')}"
           djConfig="parseOnLoad:true"></script>
   <g:javascript>
@@ -28,7 +27,7 @@
     </g:javascript>
   </g:ifAllGranted>
   <script type="text/javascript" src="${resource(dir: 'js', file: 'lightbox.js')}"></script>
-  <link rel="stylesheet" href="${resource(dir: 'css', file: 'lightbox.css')}" type="text/css" media="screen"/>
+  <p:css name='lightbox'/>  
 </head>
 <body>
 <g:ifAllGranted role="ROLE_ADMIN">
