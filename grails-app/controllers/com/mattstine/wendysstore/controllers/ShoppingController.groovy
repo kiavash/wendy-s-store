@@ -202,7 +202,12 @@ class ShoppingController {
           "fail"
         }
       }
+      on ("success").to "uploadCart"
       on ("fail").to "reviewOrderDetails"
+    }
+
+    uploadCart {
+
     }
 
     addShippingAddress {
