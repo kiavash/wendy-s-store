@@ -5,7 +5,7 @@ class Customization implements Serializable {
   CustomizationType type
   Boolean chargeable = false
   BigDecimal price
-  Set choices
+  SortedSet choices
   Boolean required = false
 
   static hasMany = [choices: CustomizationChoice]

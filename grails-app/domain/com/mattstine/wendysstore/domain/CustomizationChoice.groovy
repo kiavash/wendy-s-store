@@ -2,11 +2,16 @@ package com.mattstine.wendysstore.domain
 
 import java.text.DecimalFormat
 
-class CustomizationChoice implements Serializable {
+class CustomizationChoice implements Serializable, Comparable {
 
   String label
   Boolean chargeable = false
   BigDecimal price
+  Integer sortIndex
+
+  int compareTo(obj) {
+    sortIndex.compareTo(obj.sortIndex)
+  }
 
   static constraints = {
     price(nullable: true,

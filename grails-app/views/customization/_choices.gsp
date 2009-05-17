@@ -11,6 +11,7 @@
     <label for="label">Label:</label><g:textField name="label" value="${customizationChoiceInstance.label}"/>
     <label for="chargeable">Chargeable:</label><g:checkBox id="chargeable" name="chargeable" value="${customizationChoiceInstance?.chargeable}"/>
     <label for="price">Price:</label><g:textField id="price" name="price" value="${customizationChoiceInstance.price}"/>
+    <label for="sortIndex">Sort Index:</label><g:textField id="sortIndex" name="sortIndex" value="${customizationChoiceInstance.sortIndex}"/>
     <span class="button">
       <g:if test="${customizationChoiceInstance?.id == null}">
         <g:actionSubmit class="add" value="Add Choice" action="addChoice"/>
@@ -32,6 +33,8 @@
 
       <g:sortableColumn property="price" title="Price"/>
 
+      <g:sortableColumn property="sortIndex" title="Sort Index"/>
+
       <th>&nbsp;</th>
 
       <th>&nbsp;</th>
@@ -47,6 +50,8 @@
         <td><g:if test="${customizationChoiceInstance.chargeable}">Yes</g:if><g:else>No</g:else></td>
 
         <td><g:formatNumber number="${customizationChoiceInstance.price}" format="\$0.00"/></td>
+
+        <td>${customizationChoiceInstance.sortIndex}</td>
 
         <td class="buttons">
           <g:form action="editChoice">
