@@ -195,7 +195,7 @@ class ShoppingController {
             redirectParamMap.phoneSuffix = flow.order.shippingAddress.phoneSuffix
           }
 
-           this.redirect(controller: 'paypal', action: 'uploadCart', params: redirectParamMap)
+          [redirectParamMap: redirectParamMap]
 
 
         } else {
@@ -206,9 +206,7 @@ class ShoppingController {
       on ("fail").to "reviewOrderDetails"
     }
 
-    uploadCart {
-
-    }
+    uploadCart()
 
     addShippingAddress {
       on("save").to("saveShippingAddress")
@@ -219,7 +217,7 @@ class ShoppingController {
         def user = User.get(params.userId)
         def address = new Address(params)
 
-        if (!address.hasErrors() && address.validate()) {
+        if (!address.hasErrors() && address.validate()) {     
           if (address.defaultAddress) {
             addressService.saveAddressAsNewDefault(user, address)
           } else {
