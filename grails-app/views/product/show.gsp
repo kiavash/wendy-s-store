@@ -43,7 +43,6 @@
   <g:if test="${flash.message}">
     <div class="notice">${flash.message}</div>
   </g:if>
-  <div id="ajaxMessage" class="notice" style="visibility: hidden"></div>
 </div>
 <div id="productImage" class="span-20 last" style="text-align: center"><a href="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.fullSizeImage?.name)}" rel="lightbox"><img src="${resource(dir: grailsApplication.config.store.productImages.webPath, file: productInstance?.mediumImage?.name)}" width="500" class="productImage"><br/>Click to Enlarge</a></div>
 <div id="productContainer" class="span-20 last">
@@ -76,7 +75,8 @@
           </g:else>
         </g:else>
       </p>
-
+      <div id="ajaxMessage" class="notice" style="display: none"></div>
+      
       <p><label for="quantity">Quantity</label><br/><g:textField name="quantity" value="1" size="3"/></p>
 
       <g:hiddenField name="id" value="${productInstance.id}"/>
