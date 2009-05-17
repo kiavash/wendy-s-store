@@ -15,16 +15,9 @@ uiperformance.enabled = true
 uiperformance.continueAfterMinifyCssError = true
 uiperformance.processJS = false
 
-uiperformance.bundles = [
-   [type: 'js',
-    name: 'prototype/prototype.all',
-    files: ['prototype/prototype',
-            'prototype/scriptaculous',
-            'prototype/builder',
-            'prototype/controls',
-            'prototype/effects',
-            'prototype/slider',
-            'prototype/dragdrop']]
+uiperformance.exclusions = [
+   "**/loading.gif",
+   "**/closelabel.gif"
 ]
 
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
