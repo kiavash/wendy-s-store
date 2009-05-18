@@ -46,8 +46,8 @@ grails.enable.native2ascii = true
 // set per-environment serverURL stem for creating absolute links
 environments {
   production {
-    grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
-    grails.paypal.email = "seller_1237686842_biz@mattstine.com"
+    grails.paypal.server = "https://www.paypal.com/cgi-bin/webscr"
+    grails.paypal.email = "wendystine@yahoo.com"
     grails.serverURL = "http://www.duckduckgoosedesigns.com"
     store.productImages.location = "/home/webadmin/duckduckgoosedesigns.com/html/media/productImages"
     store.productImages.webPath = "media/productImages"
