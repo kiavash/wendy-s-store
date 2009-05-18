@@ -6,5 +6,5 @@
   </ul>
 </div>
 <script type="javascript">
-  $('ajaxMessage').removeClassName('message').setStyle({visibility: 'visible'});
+  $('ajaxMessage').removeClassName('message').show();
 </script>
