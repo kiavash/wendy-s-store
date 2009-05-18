@@ -171,6 +171,9 @@ class ShoppingController {
 
           def redirectParamMap = [:]
 
+
+          redirectParamMap.pageStyle = 'DuckDuckGoose'
+
           redirectParamMap.returnController = 'shopping'
           redirectParamMap.returnAction = 'success'
           redirectParamMap.cancelController = 'shopping'
