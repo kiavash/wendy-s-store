@@ -94,7 +94,7 @@
 </g:ifAllGranted>
 <div class="span-20 last">
   <h3 class="indent"><g:productCategoryBreadcrumbs category="${category}"/></h3>
-  <div class="prepend-1 span-18 append-1">${category?.description?.encodeAsTextile()}</div>
+  <div id="categoryDescription" class="prepend-1 span-18 append-1">${category?.description?.encodeAsTextile()}</div>
 </div>
 <div id="subCategoryThumbContainer">
   <g:set var="rowIndex" value="${0}"/>

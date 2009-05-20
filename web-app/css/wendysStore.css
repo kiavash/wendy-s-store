@@ -95,6 +95,10 @@ textarea {width:260px;height:125px;padding:5px;}
     font-size: 1.15em;
 }
 
+#categoryDescription {
+    font-size: 1.15em;
+}
+
 #productContainer {
     margin-top: 20px;
 }
