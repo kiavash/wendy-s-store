@@ -94,6 +94,7 @@
 </g:ifAllGranted>
 <div class="span-20 last">
   <h3 class="indent"><g:productCategoryBreadcrumbs category="${category}"/></h3>
+  <div class="prepend-1 span-18 append-1">${category?.description?.encodeAsTextile()}</div>  
 </div>
 <div id="productThumbContainer">
   <g:render template="/productThumbs" model="${[products:category.products]}"/>
