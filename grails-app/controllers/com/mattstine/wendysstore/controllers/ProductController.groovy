@@ -96,7 +96,7 @@ class ProductController {
         body {
           textarea {
             a(href: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.fullSizeImage.name), rel: 'lightbox') {
-              img(src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '500')
+              img(class: 'productImage', src: resource(dir: grailsApplication.config.store.productImages.webPath, file: product.mediumImage.name), width: '500')
               br('Click to Enlarge')
             }
           }
