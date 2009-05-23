@@ -11,7 +11,7 @@
   <p>Thank you for visiting and Happy Shopping!</p>
 
   <div class="prepend-2 span-16 append-2">
-    <img src="${resource(dir: "images", file: "block.jpg")}" usemap="#map"/>
+    <p:image src="block.jpg" usemap="#map"/>
     <map name="map">
       <!-- #$-:Image map file created by GIMP Image Map plug-in -->
       <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
@@ -19,7 +19,7 @@
       <!-- #$VERSION:2.3 -->
       <!-- #$AUTHOR:mstine -->
       <area shape="circle" coords="473,185,77" href="http://duckduckgoosedesigns.blogspot.com/"/>
-      <area shape="circle" coords="474,382,77" href="http://www.duckduckgoosedesigns.com/blogButton/index"/>
+      <area shape="circle" coords="474,382,77" href="${createLink(controller:"page", action:"show", id:"3")}"/>
       <area shape="rect" coords="83,121,339,460" href="${createLink(controller:"shopping", action:"category", id:"7")}"/>
     </map>
   </div>
