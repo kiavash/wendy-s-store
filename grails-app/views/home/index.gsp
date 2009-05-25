@@ -19,8 +19,8 @@
       <!-- #$VERSION:2.3 -->
       <!-- #$AUTHOR:mstine  -->
       <area shape="circle" coords="473,185,77" href="http://duckduckgoosedesigns.blogspot.com/"/>
-      <area shape="circle" coords="474,382,77" href="http://www.duckduckgoosedesigns.com/blogButton/index"/>
-      <area shape="rect" coords="81,117,337,456" href="http://duckduckgoosedesigns.com/shopping/category/7"/>
+      <area shape="circle" coords="474,382,77" href="${createLink(controller:"page", action:"show", id:"3")}"/>
+      <area shape="rect" coords="81,117,337,456" href="${createLink(controller:"shopping", action:"category", id:"7")}"/>
     </map>
   </div>
 
