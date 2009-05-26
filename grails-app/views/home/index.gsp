@@ -7,8 +7,8 @@
 <body>
 <div class="prepend-1 span-18 append-1">
   <h2>Welcome<g:isLoggedIn>, <g:loggedInUserInfo field="firstName"/></g:isLoggedIn>!</h2>
-  <p>Welcome to Duck Duck Goose Designs!  We’re so excited you're here!  Duck Duck Goose Designs offers a fun, whimsical collection of personalized stationery, invitations, and gifts.  Everything you see on our site is my own original design,  created with a wide variety of tools ranging from colored pencils to graphics programs.  We hope you love what you see!
-Almost every design on our site can be adapted to fit almost any product.  So if you're throwing a party and ordering one of our adorable invitations, let us know if you'd like coordinating stickers and thank you notes.   Love a tshirt design and want it on a round sticker?  Just tell me…I'll be glad to help.  All products are customizable too (choose your font, font color, message etc.).  The possibilities are endless!
+  <p>Welcome to Duck Duck Goose Designs!  We're so excited you're here!  Duck Duck Goose Designs offers a fun, whimsical collection of personalized stationery, invitations, and gifts.  Everything you see on our site is my own original design,  created with a wide variety of tools ranging from colored pencils to graphics programs.  We hope you love what you see!
+Almost every design on our site can be adapted to fit almost any product.  So if you're throwing a party and ordering one of our adorable invitations, let us know if you'd like coordinating stickers and thank you notes.   Love a tshirt design and want it on a round sticker?  Just tell me...I'll be glad to help.  All products are customizable too (choose your font, font color, message etc.).  The possibilities are endless!
 We have so many new designs coming soon as well as some new products.  So bookmark us on your favorites and check back often.  You'll be glad you did!</p>
 
 
