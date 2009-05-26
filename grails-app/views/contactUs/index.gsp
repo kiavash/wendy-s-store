@@ -24,6 +24,13 @@
 </g:isLoggedIn>
 <div class="prepend-1 span-18 append-1">
   <h2>Contact Us</h2>
+  <p>Need to contact us? You can reach us in one of 3 easy ways!</p>
+  <ol>
+    <li>Fill out the form below, and we'll get back to you within 48 hours (during the week).</li>
+    <li>Email us at <a href="mailto:duckduckgoosedesigns@yahoo.com">duckduckgoosedesigns@yahoo.com</a>.</li>
+    <li>You can reach us by phone Monday through Friday from 9-4 (CST) at 901-493-7203.</li>
+  </ol>
+  <p>Any messages received over the weekend or on holidays will be returned within 48 hours from the next business day.</p>
   <div id="ajaxMessage" class="notice" style="display: none"></div>
   <g:form name="contactUsForm">
     <fieldset>
