@@ -100,34 +100,34 @@
     </jsp-config>
 
 <!-- Define reference to the user database for looking up roles -->
-	<resource-env-ref>
-		<description>Link to the UserDatabase instance from which
-                    we request lists of defined role names.</description>
-		<resource-env-ref-name>UserDatabase</resource-env-ref-name>
-		<resource-env-ref-type>org.apache.catalina.UserDatabase</resource-env-ref-type>
-	</resource-env-ref>
+	<!--<resource-env-ref>-->
+		<!--<description>Link to the UserDatabase instance from which-->
+                    <!--we request lists of defined role names.</description>-->
+		<!--<resource-env-ref-name>UserDatabase</resource-env-ref-name>-->
+		<!--<resource-env-ref-type>org.apache.catalina.UserDatabase</resource-env-ref-type>-->
+	<!--</resource-env-ref>-->
 
 	<!-- Define a Security Constraint on this Application -->
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Entire Application</web-resource-name>
-			<url-pattern>/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
+	<!--<security-constraint>-->
+		<!--<web-resource-collection>-->
+			<!--<web-resource-name>Entire Application</web-resource-name>-->
+			<!--<url-pattern>/*</url-pattern>-->
+		<!--</web-resource-collection>-->
+		<!--<auth-constraint>-->
+			<!--<role-name>admin</role-name>-->
+		<!--</auth-constraint>-->
+	<!--</security-constraint>-->
 
-	<login-config>
-		<auth-method>BASIC</auth-method>
-		<realm-name>Your Realm Name</realm-name>
-	</login-config>
+	<!--<login-config>-->
+		<!--<auth-method>BASIC</auth-method>-->
+		<!--<realm-name>Your Realm Name</realm-name>-->
+	<!--</login-config>-->
 
-	<security-role>
-		<description>The role that is required to log in to
-                    the Manager Application</description>
-		<role-name>admin</role-name>
-	</security-role>
+	<!--<security-role>-->
+		<!--<description>The role that is required to log in to-->
+                    <!--the Manager Application</description>-->
+		<!--<role-name>admin</role-name>-->
+	<!--</security-role>-->
 
 
 </web-app>
