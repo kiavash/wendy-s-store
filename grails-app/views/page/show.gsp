@@ -4,17 +4,17 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="layout" content="main"/>
   <title>${pageInstance.pageTitle}</title>
-  <g:javascript>
-    document.observe("dom:loaded", function() {
+  %{--<g:javascript>--}%
+    <!--document.observe("dom:loaded", function() {-->
 
-          var pageContent = escape($('content').innerHTML);
-          new Ajax.Updater('pageContent','${createLink(controller: 'page', action: 'preview')}',{asynchronous:true,evalScripts:true,parameters:'text='+pageContent});
+          <!--var pageContent = escape($('content').innerHTML);-->
+          %{--new Ajax.Updater('pageContent','${createLink(controller: 'page', action: 'preview')}',{asynchronous:true,evalScripts:true,parameters:'text='+pageContent});--}%
 
-    });
-  </g:javascript>
+    <!--});-->
+  %{--</g:javascript>--}%
 </head>
 <body>
-<div id="content" style="display: none">${pageInstance.pageContent}</div>
+%{--<div id="content" style="display: none">${pageInstance.pageContent}</div>--}%
 <g:ifAllGranted role="ROLE_ADMIN">
   <div class="nav">
     <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}">Home</a></span>
@@ -28,7 +28,7 @@
   </g:if>
   <h2>${pageInstance.pageTitle}</h2>
 
-  <div id="pageContent"></div>
+  <div id="pageContent">${pageInstance.pageContent.encodeAsTextile()}</div>
   <g:ifAllGranted role="ROLE_ADMIN">
     <div class="buttons">
       <g:form>
