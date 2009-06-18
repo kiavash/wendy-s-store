@@ -18,7 +18,7 @@
       }});
 
       Sortable.create('pageMenu', {only:'sortable', onUpdate:function() {
-          <g:remoteFunction controller="page" action="sortMenu" params="Sortable.serialize('pageMenu')"/>
+      <g:remoteFunction controller="page" action="sortMenu" params="Sortable.serialize('pageMenu')"/>
       }});
 
       new Ajax.InPlaceEditor('headerMessage','${createLink(controller: 'welcomeMessage', action: 'update')}');  
@@ -30,7 +30,7 @@
 </head>
 <body>
 <div id="container" class="container">
-  <div id="topBorder" class="span-24">&nbsp;</div>  
+  <div id="topBorder" class="span-24">&nbsp;</div>
   <div id="header" class="span-24">
     <div class="span-15"><p:image src="DuckDuckLogo.jpg"/></div>
     <div class="span-9 last">
@@ -40,7 +40,7 @@
       <div id="contactUsButton" class="span-3 last buttonCell"><g:link controller="contactUs"><p:image src="contactUsButton.png"/></g:link></div>
     </div>
   </div>
-  <div id="bottomBorder" class="span-24">&nbsp;</div>    
+  <div id="bottomBorder" class="span-24">&nbsp;</div>
   <div id="sidebar" class="span-4">
     <p:image src="shopOurStore.png"/>
     <ul id="productCategoryMenu" class="menu">
@@ -72,7 +72,7 @@
         <li class="menuItem"><g:link controller="page">Pages</g:link></li>
         <li class="menuItem"><g:link controller="user">Users</g:link></li>
         <li class="menuItem"><g:link controller="role">Roles</g:link></li>
-        <li class="menuItem"><g:link controller="contactUs" action="showMessages">View Messages</g:link></li>        
+        <li class="menuItem"><g:link controller="contactUs" action="showMessages">View Messages</g:link></li>
       </ul>
     </g:ifAllGranted>
   </div>
@@ -84,7 +84,18 @@
     <p>&copy;2009 Duck Duck Goose Designs. All Rights Reserved.<br/>
       Web Development by <a href="http://www.mattstine.com">Matt Stine</a>.</p>
   </div>
-  <div id="footBorder" class="span-24">&nbsp;</div>    
+  <div id="footBorder" class="span-24">&nbsp;</div>
 </div>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("UA-9379310-1");
+    pageTracker._trackPageview();
+  } catch(err) {
+  }
+</script>
 </body>
 </html>
