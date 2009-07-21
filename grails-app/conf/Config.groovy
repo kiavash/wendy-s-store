@@ -10,6 +10,8 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+grails.mail.jndiName = "java:comp/env/mail/DuckDuckGooseMailSession"
+
 uiperformance.enabled = true
 
 uiperformance.continueAfterMinifyCssError = true
@@ -42,6 +44,8 @@ grails.converters.encoding = "UTF-8"
 
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
+
+
 
 // set per-environment serverURL stem for creating absolute links
 environments {
