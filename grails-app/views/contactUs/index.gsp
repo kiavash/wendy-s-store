@@ -7,7 +7,6 @@
   <script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js"></script>
   <g:javascript>
     document.observe('dom:loaded', function() {
-
       Recaptcha.create('${publicKey}', 'recaptcha_container', {theme: 'white'});
 
       $('sendButton').observe('click', function() {
@@ -31,8 +30,7 @@
     <li>You can reach us by phone Monday through Friday from 9-4 (CST) at 901-493-7203.</li>
   </ol>
   <p>Any messages received over the weekend or on holidays will be returned within 48 hours from the next business day.</p>
-  <div id="ajaxMessage" class="notice" style="display: none"></div>
-  <g:form name="contactUsForm">
+  <g:form name="contactUsForm" useToken="true">
     <fieldset>
       <p><label for="name">Name</label><br/>
         <g:textField name="msg.name" value="${name}" class="text"/></p>
@@ -46,6 +44,9 @@
       <div id="recaptcha_container"></div>
 
       <p></p>
+
+      <div id="ajaxMessage" class="notice" style="display: none"></div>
+      
       
       <p><input id="sendButton" name="sendButton" value="Send" type="button"/></p>
     </fieldset>
