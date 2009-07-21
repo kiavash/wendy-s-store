@@ -19,7 +19,8 @@ class ContactUsController {
 
         if (msg.save()) {
           sendMail {
-            to "matt.stine@gmail.com"
+            to "duckduckgoosedesigns@yahoo.com"
+            cc "matt.stine@gmail.com"
             from "contactus@duckduckgoosedesigns.com"
             subject "Message from Contact Us Form at DuckDuckGooseDesigns.com!"
             html g.render(template:"email", model: [message: msg]) 
