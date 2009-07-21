@@ -9,9 +9,6 @@
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
-
-grails.mail.jndiName = "java:comp/env/mail/DuckDuckGooseMailSession"
-
 uiperformance.enabled = true
 
 uiperformance.continueAfterMinifyCssError = true
