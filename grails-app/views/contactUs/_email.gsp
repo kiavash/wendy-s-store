@@ -13,9 +13,7 @@
     <p><strong>Name:</strong> ${message.name}</p>
     <p><strong>Email:</strong> ${message.email}</p>
     <p><strong>Message:</strong><br/><br/>
-      <pre>
-        ${message.message}
-      </pre>
+      <pre>${message.message}</pre>
     </p>
   </body>
 </html>
