@@ -21,7 +21,7 @@
       <g:remoteFunction controller="page" action="sortMenu" params="Sortable.serialize('pageMenu')"/>
       }});
 
-      new Ajax.InPlaceEditor('headerMessage','${createLink(controller: 'welcomeMessage', action: 'update')}');  
+//      new Ajax.InPlaceEditor('headerMessage','${createLink(controller: 'welcomeMessage', action: 'update')}');
 
       });
     </g:javascript>
@@ -34,7 +34,7 @@
   <div id="header" class="span-24">
     <div class="span-15"><p:image src="DuckDuckLogo.jpg"/></div>
     <div class="span-9 last">
-      <div id="headerMessage" class="span-9">${application.getAttribute("welcomeMessage")}</div>
+      <div id="headerMessage" class="span-9"><g:blurb name="welcomeMessage"/></div>
       <div id="homeButtom" class="span-3 buttonCell"><g:link controller="home"><p:image src="homeButton.png"/></g:link></div>
       <div id="cartButton" class="span-3 buttonCell"><g:link controller="shopping" action="viewCart"><p:image src="cartButton.png"/></g:link></div>
       <div id="contactUsButton" class="span-3 last buttonCell"><g:link controller="contactUs"><p:image src="contactUsButton.png"/></g:link></div>
@@ -64,6 +64,7 @@
     <g:ifAllGranted role="ROLE_ADMIN">
       <p:image src="admin.png"/>
       <ul class="menu">
+        <li class="menuItem"><g:link controller="blurb">Blurbs</g:link></li>
         <li class="menuItem"><g:link controller="orders">Orders</g:link></li>
         <li class="menuItem"><g:link controller="product">Products</g:link></li>
         <li class="menuItem"><g:link controller="productCategory">Categories</g:link></li>
