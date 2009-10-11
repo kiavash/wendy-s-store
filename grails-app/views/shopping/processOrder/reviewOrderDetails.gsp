@@ -130,22 +130,28 @@
     <fieldset>
 
       <p><label for="deliveryMethod">Delivery Method</label><br/>
-        <g:radioGroup name="deliveryMethod" labels="[CheckoutCommand.LOCAL_PICKUP,CheckoutCommand.SHIP]" values="[CheckoutCommand.LOCAL_PICKUP,CheckoutCommand.SHIP]" value="${CheckoutCommand.LOCAL_PICKUP}">
-          ${it.radio} ${it.label}<br/>
-        </g:radioGroup></p>
+    <g:radioGroup name="deliveryMethod" labels="[CheckoutCommand.LOCAL_PICKUP,CheckoutCommand.SHIP]" values="[CheckoutCommand.LOCAL_PICKUP,CheckoutCommand.SHIP]" value="${CheckoutCommand.LOCAL_PICKUP}">
+      ${it.radio} ${it.label}<br/>
+    </g:radioGroup></p>
 
-      <p><label for="shippingAddress">Shipping Address</label><br/>
-        <select id="shippingAddress" name="shippingAddress">
-          <option value="">Select a value...</option>
-          <g:each in="${person.shippingAddresses}" var="shippingAddress">
-            <option value="${shippingAddress.id}" <g:if test="${shippingAddress.defaultAddress}">selected</g:if>>${shippingAddress.name}</option>
-          </g:each>
-        </select> (<g:link action="processOrder" event="addShippingAddress" params="${[userId:person.id]}">Add Shipping Address</g:link>)</p>
+    <p><label for="shippingAddress">Shipping Address</label><br/>
+      <select id="shippingAddress" name="shippingAddress">
+        <option value="">Select a value...</option>
+        <g:each in="${person.shippingAddresses}" var="shippingAddress">
+          <option value="${shippingAddress.id}" <g:if test="${shippingAddress.defaultAddress}">selected</g:if>>${shippingAddress.name}</option>
+        </g:each>
+      </select> (<g:link action="processOrder" event="addShippingAddress" params="${[userId:person.id]}">Add Shipping Address</g:link>)</p>
 
-      <div id="shippingAddressView" style="display:none"></div>
+    <div id="shippingAddressView" style="display:none"></div>
 
-      <p><g:submitButton value="Checkout" name="checkout"/><br/><!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr>
-<tr><td align="center"><a href="#" onclick="javascript:window.open('https://www.sandbox.paypal.com/us/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');"><img  src="https://www.sandbox.paypal.com/en_US/i/bnr/horizontal_solution_PPeCheck.gif" border="0" alt="Solution Graphics"></a></td></tr></table><!-- PayPal Logo --></p>
+    <g:hasErrors bean="${cmd}">
+      <div class="error">
+        <g:renderErrors bean="${cmd}" as="list"/>
+      </div>
+    </g:hasErrors>  
+
+    <p><g:submitButton value="Checkout" name="checkout"/><br/><!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr>
+    <tr><td align="center"><a href="#" onclick="javascript:window.open('https://www.sandbox.paypal.com/us/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside', 'olcwhatispaypal', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');"><img src="https://www.sandbox.paypal.com/en_US/i/bnr/horizontal_solution_PPeCheck.gif" border="0" alt="Solution Graphics"></a></td></tr></table><!-- PayPal Logo --></p>
     </fieldset>
   </g:form>
 </div>
