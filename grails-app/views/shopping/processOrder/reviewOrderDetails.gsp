@@ -128,6 +128,7 @@
 
   <g:form name="prepareOrderForm" controller="shopping" action="processOrder">
     <fieldset>
+    <p><g:blurb name="deliveryInstructions"/></p>
 
       <p><label for="deliveryMethod">Delivery Method</label><br/>
     <g:radioGroup name="deliveryMethod" labels="[CheckoutCommand.LOCAL_PICKUP,CheckoutCommand.SHIP]" values="[CheckoutCommand.LOCAL_PICKUP,CheckoutCommand.SHIP]" value="${CheckoutCommand.LOCAL_PICKUP}">
