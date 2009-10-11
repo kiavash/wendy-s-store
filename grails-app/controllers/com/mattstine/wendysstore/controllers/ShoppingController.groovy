@@ -202,11 +202,12 @@ class ShoppingController {
 
 
         } else {
-          "fail"
+          flow.cmd = cmd
+          return error()
         }
       }
+      on ("error").to "reviewOrderDetails"      
       on ("success").to "uploadCart"
-      on ("fail").to "reviewOrderDetails"
     }
 
     uploadCart()
@@ -306,7 +307,7 @@ class ShoppingController {
 
 }
 
-class CheckoutCommand {
+class CheckoutCommand implements Serializable {
   static final LOCAL_PICKUP = 'Local Pickup'
   static final SHIP = 'Ship'
 
@@ -315,9 +316,10 @@ class CheckoutCommand {
 
   static constraints = {
     deliveryMethod(blank: false)
-    shippingAddress(constraint: {
-      if (LOCAL_PICKUP == deliveryMethod) {
-        if (!shippingAddress || "" == shippingAddress.trim()) {
+
+    shippingAddress(validator: { val, obj ->
+      if (SHIP == obj.deliveryMethod) {
+        if (!obj.shippingAddress || "" == obj.shippingAddress.trim()) {
           return "invalid.address.for.shipping"
         }
       }
