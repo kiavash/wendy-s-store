@@ -17,4 +17,23 @@ class OrdersController {
     def show = {
       [order:Order.get(params.id)]  
     }
+
+    def shipOrder = {
+      def order = Order.get(params.id)
+      if (order.shipped) {
+        order.shipped = false
+      } else {
+        order.shipped = true
+      }
+      order.save()
+      render "OK"
+    }
+
+    def listUnshippedOrders = {
+      render (view:'list', model:[orders:Order.findAllByShipped(false)])
+    }
+
+    def listShippedOrders = {
+      render (view:'list', model:[orders:Order.findAllByShipped(true)])
+    }
 }
