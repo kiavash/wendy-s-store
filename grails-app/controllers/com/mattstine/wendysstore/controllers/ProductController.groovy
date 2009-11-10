@@ -10,7 +10,10 @@ import org.im4java.core.IMOperation
 import org.im4java.core.ConvertCmd
 
 
+
 class ProductController {
+
+  def twitterService
 
   static navigation = [
           title: 'Manage Products',
@@ -255,5 +258,18 @@ class ProductController {
     }
 
     product.customizations = sortedCustomizationList
+  }
+
+  @Secured(['ROLE_ADMIN'])
+  def tweetProduct = {
+    String twitterUser = org.grails.plugins.settings.Setting.valueFor("twitter.username")
+    String twitterPw = org.grails.plugins.settings.Setting.valueFor("twitter.password")
+
+    if (twitterUser && twitterPw) {
+      twitterService.setStatus(params.tweet, [username:twitterUser, password:twitterPw])
+    }
+
+    redirect (action:show, id:params.id)
+
   }
 }
