@@ -76,6 +76,7 @@
         <li class="menuItem"><g:link controller="contactUs" action="showMessages">View Messages</g:link></li>
       </ul>
     </g:ifAllGranted>
+    <a href="http://twitter.com/myduckduckgoose"><img style="margin: -55px" src="http://twitterbuttons.com/images/ex/twitter-31b.png" title="By: TwitterButtons.com" width="212" height="69" /></a>
   </div>
   <div id="main" class="span-20 last">
     <g:layoutBody/>
