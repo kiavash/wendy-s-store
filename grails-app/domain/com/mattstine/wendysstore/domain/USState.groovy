@@ -16,6 +16,7 @@ public enum USState {
   CO('Colorado'),
   CT('Connecticut'),
   DE('Delaware'),
+  DC('D.C.'),
   FL('Florida'),
   GA('Georgia'),
   HI('Hawaii'),
