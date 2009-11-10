@@ -173,6 +173,14 @@
       </g:each>
       </tbody>
     </table>
+
+    <h3>Tweet this:</h3>
+    <g:form name="tweetThisForm" action="post">
+      <input type="hidden" name="productId" value="${productInstance?.id}"/>
+      <g:textArea name="tweet">Featured Product: ${productInstance.name}. Visit <g:renderTinyLink link="${link(controller:'product', action:'show', id: productInstance?.id, absolute:true)}"/></g:textArea>
+      <g:actionSubmit class="add" value="Tweet This!" action="tweetProduct"/>
+
+    </g:form>
   </div>
 
 </g:ifAllGranted>
